@@ -1,0 +1,12 @@
+{
+  "crons": [
+    {
+      "path": "/api/coingecko/near/update",
+      "schedule": "*/30 * * * *"
+    },
+    {
+      "path": "/api/coingecko/all/update",
+      "schedule": "*/30 * * * *"
+    }
+  ]
+}

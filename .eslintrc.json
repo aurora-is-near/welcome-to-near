@@ -1,0 +1,15 @@
+{
+  "extends": ["next/core-web-vitals", "plugin:prettier/recommended"],
+  "ignorePatterns": ["types/supabase.ts"],
+  "rules": {
+    "react/no-unescaped-entities": "off",
+    "react-hooks/rules-of-hooks": "off",
+    "react/display-name": "off",
+    "react/jsx-key": "off",
+    "react/no-children-prop": "off",
+    "import/no-anonymous-default-export": "off",
+    "react-hooks/exhaustive-deps": "off",
+    "jsx-a11y/alt-text": "off",
+    "@next/next/no-img-element": "off"
+  }
+}
