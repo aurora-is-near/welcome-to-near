@@ -153,7 +153,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  if (process.env.COMING_SOON) {
+  if (process.env.COMING_SOON === "true") {
     return <ComingSoon />;
   }
 
