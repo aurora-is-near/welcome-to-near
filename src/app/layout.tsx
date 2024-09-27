@@ -8,6 +8,7 @@ import localFont from "next/font/local";
 import getWebsiteUrl from "@/utils/getWebsiteUrl";
 import CookiesConsent from "@/components/CookiesConsent";
 import type { Viewport } from "next";
+import ComingSoon from "./ComingSoon";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -15,7 +16,7 @@ export const viewport: Viewport = {
   maximumScale: 1,
 };
 
-const monaSans = localFont({
+export const monaSans = localFont({
   src: [
     {
       path: "./fonts/MonaSans-Regular.woff2",
@@ -51,7 +52,7 @@ const monaSans = localFont({
   variable: "--font-monaSans",
 });
 
-const fkGrotesk = localFont({
+export const fkGrotesk = localFont({
   src: [
     {
       path: "./fonts/FKGrotesk-Regular.otf",
@@ -152,6 +153,10 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  if (process.env.COMING_SOON) {
+    return <ComingSoon />;
+  }
+
   return (
     <html lang="en" className="scroll-smooth">
       <body
