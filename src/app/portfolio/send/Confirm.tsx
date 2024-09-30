@@ -49,7 +49,6 @@ const Confirm = () => {
   }, [recipient]);
 
   const tokenUsdValue = selectedTokenInfo?.usdValue || 0;
-  const amountUsdValue = +amount * tokenUsdValue;
 
   const transferNearToken = async () => {
     if (selector === null) return;
@@ -219,7 +218,7 @@ const Confirm = () => {
             <div className="mt-0.5 text-xs leading-[1.4] tracking-wider text-sand-11">
               $
               {prettifyValue({
-                value: amountUsdValue,
+                value: tokenUsdValue,
                 maxDigits: 4,
               })}
             </div>
