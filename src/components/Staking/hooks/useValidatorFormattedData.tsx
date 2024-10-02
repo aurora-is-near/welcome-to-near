@@ -15,6 +15,11 @@ export default function useValidatorFormattedData(validator: Validator) {
         canUnstake: false,
       };
     }
+    const availableData = adjustTotalAvailableData(
+      validator.available,
+      validator.canWithdraw
+    );
+
     const result = {
       totalStaked:
         validator.staked !== null
@@ -24,11 +29,8 @@ export default function useValidatorFormattedData(validator: Validator) {
         validator.pending !== null
           ? `${formatNearTokenAmount(validator.pending)} NEAR`
           : DEFAULT_NEAR_VALUE,
-      totalAvailable:
-        validator.available !== null
-          ? `${formatTotalAvailable(validator.available)} NEAR`
-          : DEFAULT_NEAR_VALUE,
-      canWithdraw: validator.canWithdraw,
+      totalAvailable: `${availableData.amount} NEAR`,
+      canWithdraw: availableData.canWithdraw,
       canUnstake: validator.canUnstake,
     };
 
@@ -38,18 +40,36 @@ export default function useValidatorFormattedData(validator: Validator) {
 }
 
 export const MIN_DISPLAYED_AVAILABLE = "< 0.00001";
-export function formatTotalAvailable(amount: string) {
-  if (amount === "0") return amount;
-  return totalAvailableIsLessThanMinDisplayed(amount)
-    ? MIN_DISPLAYED_AVAILABLE
-    : formatNearTokenAmount(amount);
+
+/**
+ * @description protection against tiny amount of near being withdrawable
+ */
+export function adjustTotalAvailableData(
+  amount: string | null,
+  canWithdraw: boolean | null
+): { amount: string; canWithdraw: boolean } {
+  if (canWithdraw === false || amount === null || canWithdraw === null) {
+    return {
+      amount: "0",
+      canWithdraw: false,
+    };
+  }
+  if (totalAvailableIsLessThanMinDisplayed(amount)) {
+    return {
+      amount: "0",
+      canWithdraw: false,
+    };
+  }
+  return {
+    amount: formatNearTokenAmount(amount),
+    canWithdraw,
+  };
 }
 
 export function totalAvailableIsLessThanMinDisplayed(amount: string) {
   try {
-    const WITHDRAW_AMOUNT_THRESHOLD = new BN("10000000000000000000");
     const availableAmount = new BN(amount);
-    return availableAmount.lt(WITHDRAW_AMOUNT_THRESHOLD);
+    return availableAmount.lt(new BN("10000000000000000000")); // 0.00001 NEAR
   } catch {
     return false;
   }

@@ -10,7 +10,7 @@ import StakedBalance from "./components/StakedBalance";
 import Tooltip from "@/components/Tooltip";
 import { Validator } from "./utils";
 import useValidatorFormattedData, {
-  formatTotalAvailable,
+  adjustTotalAvailableData,
 } from "./hooks/useValidatorFormattedData";
 import ConnectAccount from "./components/ConnectAccount";
 import { Card, CardPadding } from "../Card";
@@ -31,6 +31,10 @@ export default function Staking() {
   } = useStaking();
 
   const formattedStakingBalanceData = useMemo(() => {
+    const totalAvailableData = adjustTotalAvailableData(
+      stakingBalances.totalAvailable,
+      stakingBalances.canWithdraw
+    );
     const result = {
       totalStaked:
         stakingBalances.totalStaked !== null
@@ -40,14 +44,8 @@ export default function Staking() {
         stakingBalances.totalPending !== null
           ? `${formatNearTokenAmount(stakingBalances.totalPending as string)} NEAR`
           : DEFAULT_NEAR_VALUE,
-      totalAvailable:
-        stakingBalances.totalAvailable !== null
-          ? `${formatTotalAvailable(stakingBalances.totalAvailable)} NEAR`
-          : DEFAULT_NEAR_VALUE,
-      canWithdraw:
-        stakingBalances.canWithdraw !== null
-          ? stakingBalances.canWithdraw
-          : false,
+      totalAvailable: `${totalAvailableData.amount} NEAR`,
+      canWithdraw: totalAvailableData.canWithdraw,
       canUnstake:
         stakingBalances.canUnstake !== null
           ? stakingBalances.canUnstake
