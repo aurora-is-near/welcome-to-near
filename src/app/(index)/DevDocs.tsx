@@ -1,6 +1,5 @@
 import Button from "@/components/Button";
-import { DevDocsIcon } from "@/icons";
-import { ArrowTopRightOnSquareIcon } from "@heroicons/react/20/solid";
+import { DevDocsIcon, ArrowSquareOut } from "@/icons";
 
 const DevDocs = async () => {
   return (
@@ -22,7 +21,7 @@ const DevDocs = async () => {
         style="light-border"
       >
         <span className="sr-only">Learn more</span>
-        <ArrowTopRightOnSquareIcon className="h-5 w-5 flex-shrink-0 text-sand-12" />
+        <ArrowSquareOut className="h-5 w-5 flex-shrink-0 text-sand-12" />
       </Button>
     </div>
   );
