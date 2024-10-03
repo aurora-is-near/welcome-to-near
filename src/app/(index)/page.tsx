@@ -1,6 +1,6 @@
 import Button from "@/components/Button";
 import Container from "@/components/Container";
-import { NearLogo, PlantIcon } from "@/icons";
+import { ArrowSquareOut, NearLogo, PlantIcon } from "@/icons";
 import {
   ArrowDownIcon,
   ArrowTopRightOnSquareIcon,
@@ -14,11 +14,9 @@ import Spinner from "@/components/Spinner";
 import ConnectWalletButton from "./ConnectWalletButton";
 import LearnSection from "./LearnSection";
 import WalletsList from "./WalletsList";
-import NearPrice from "./NearPrice";
-import { Suspense } from "react";
-import ChartLoader from "./ChartLoader";
 import GetNearOptions from "./GetNearOptions";
 import ManualConfigurationTrigger from "./ManualConfigurationTrigger";
+import DevDocs from "./DevDocs";
 
 const Swap = dynamic(() => import("./Swap"), {
   ssr: false,
@@ -49,10 +47,6 @@ export default function Home() {
 
       <div className="relative space-y-10">
         <Container as="section" className="-mt-24 grid gap-5 lg:grid-cols-2">
-          <Suspense fallback={<ChartLoader />}>
-            <NearPrice />
-          </Suspense>
-
           <div className="relative mx-auto flex w-full justify-between rounded-2xl bg-sand-1 p-4 shadow-custom-lg ring-1 ring-black/[0.03] sm:p-6 md:max-w-lg lg:max-w-none">
             <NearLogo className="absolute right-12 top-1/2 h-[180px] w-[180px] -translate-y-1/2 text-sand-5 opacity-50 sm:opacity-100" />
             <div className="relative ml-2 max-w-80 py-4 sm:ml-4 sm:py-6">
@@ -72,9 +66,10 @@ export default function Home() {
               style="light-border"
             >
               <span className="sr-only">Learn more</span>
-              <PlusIcon className="h-5 w-5 flex-shrink-0 text-sand-12" />
+              <ArrowSquareOut className="h-5 w-5 flex-shrink-0 text-sand-12" />
             </Button>
           </div>
+          <DevDocs />
         </Container>
 
         <Container as="section" id="connect-wallet">

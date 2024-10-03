@@ -1,5 +1,6 @@
 export { default as NearLogoFull } from "./NearLogoFull.svg";
 export { default as NearLogo } from "./NearLogo.svg";
+export { default as DevDocsIcon } from "./DevDocsIcon.svg";
 export { default as EthereumLogo } from "./EthereumLogo.svg";
 export { default as PlantIcon } from "./PlantIcon.svg";
 export { default as BookPageIcon } from "./BookPageIcon.svg";
