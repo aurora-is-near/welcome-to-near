@@ -17,7 +17,7 @@ export async function addTokenToWallet(
     }
 
     const walletClient = await getConnectorClient(wagmiConfig);
-    await switchChain(walletClient,{ id: Number(process.env.chainId)}) 
+    await switchChain(walletClient, { id: Number(process.env.chainId) });
     const address = playgroundComputeAddress(contractId);
 
     watchAsset(walletClient, {
