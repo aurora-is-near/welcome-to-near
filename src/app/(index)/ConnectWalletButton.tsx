@@ -4,7 +4,10 @@ import { useCallback } from "react";
 import Link from "next/link";
 import Avatar, { ethWalletAvatarInputFormatter } from "@/components/Avatar";
 import Button from "@/components/Button";
-import { useWalletSelector } from "@/contexts/WalletSelectorContext";
+import {
+  ETHEREUM_WALLETS_CONNECTOR,
+  useWalletSelector,
+} from "@/contexts/WalletSelectorContext";
 import midTruncate from "@/utils/midTruncate";
 import { InjectedWalletBehaviour } from "@near-wallet-selector/core";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
@@ -33,7 +36,7 @@ const ConnectWalletButton = () => {
 
   const connectWithEth = useCallback(async () => {
     try {
-      const wallet = await selector.wallet("ethereum-wallets");
+      const wallet = await selector.wallet(ETHEREUM_WALLETS_CONNECTOR);
       (wallet as InjectedWalletBehaviour).signIn({ contractId: "" });
     } catch (e) {
       console.error(e);

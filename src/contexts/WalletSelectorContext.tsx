@@ -41,8 +41,10 @@ interface WalletSelectorContextValue {
   accounts: Array<AccountState>;
   accountId: string | null;
   loading: boolean;
+  isEthereumWallet: boolean;
 }
 
+export const ETHEREUM_WALLETS_CONNECTOR = "ethereum-wallets";
 const WalletSelectorContext =
   React.createContext<WalletSelectorContextValue | null>(null);
 
@@ -207,6 +209,10 @@ export const WalletSelectorContextProvider: React.FC<{
       account,
       accountId,
       loading,
+      isEthereumWallet: selector
+        ? selector.store.getState().selectedWalletId ===
+          ETHEREUM_WALLETS_CONNECTOR
+        : false,
     };
   }, [selector, modal, accounts, loading]);
 
