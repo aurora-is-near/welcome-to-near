@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   AccessKeyInfoView,
   FunctionCallPermissionView,
@@ -13,7 +13,7 @@ import { Card, CardPadding } from "@/components/Card";
 import { InformationCircleIcon } from "@heroicons/react/20/solid";
 
 const AccountPage = () => {
-  const { accountId, selector } = useWalletSelector();
+  const { accountId, selector, isEthereumWallet } = useWalletSelector();
   const [dappAccessKeys, setDappAccessKeys] = useState<AccessKeyInfoView[]>([]);
   const [onboardingAccessKeys, setOnboardingAccessKeys] = useState<
     AccessKeyInfoView[]
@@ -40,11 +40,6 @@ const AccountPage = () => {
   useEffect(() => {
     updateAccessKeys();
   }, [updateAccessKeys]);
-
-  const isEthereumWallet = useMemo(
-    () => selector.store.getState().selectedWalletId === "ethereum-wallets",
-    [selector, accountId]
-  );
 
   const onDeauthorize = useCallback(
     async (publicKey: string) => {

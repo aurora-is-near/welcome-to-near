@@ -1,5 +1,5 @@
 import { keccak256, toHex } from "viem";
-import { watchAsset } from "viem/actions";
+import { watchAsset, switchChain } from "viem/actions";
 import { getConnectorClient } from "@wagmi/core";
 import { wagmiConfig } from "@/contexts/WalletSelectorContext";
 import { getTokenMetaData } from "@/utils/near";
@@ -17,6 +17,7 @@ export async function addTokenToWallet(
     }
 
     const walletClient = await getConnectorClient(wagmiConfig);
+    await switchChain(walletClient,{ id: Number(process.env.chainId)}) 
     const address = playgroundComputeAddress(contractId);
 
     watchAsset(walletClient, {
