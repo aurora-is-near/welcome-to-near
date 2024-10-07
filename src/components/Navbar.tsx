@@ -10,6 +10,9 @@ import { Dialog, DialogPanel } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import clsx from "clsx";
 import ConnectWalletButton from "@/app/(index)/ConnectWalletButton";
+import FreeTransactionCounter, {
+  useFreeTxAmount,
+} from "./FreeTransactionCounter";
 
 const links = [
   {
@@ -29,7 +32,7 @@ const links = [
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const pathname = usePathname();
-
+  const txLeft = useFreeTxAmount();
   useEffect(() => setMobileMenuOpen(false), [pathname]);
 
   return (
@@ -41,7 +44,8 @@ const Navbar = () => {
             <NearLogoFull className="w-28" />
           </Link>
         </div>
-        <div className="flex lg:hidden">
+        <div className="flex gap-3 lg:hidden">
+          <FreeTransactionCounter txLeft={txLeft} maxFreeTx={10} />
           <button
             type="button"
             className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
@@ -70,7 +74,8 @@ const Navbar = () => {
             })}
           </ul>
         </nav>
-        <div className="hidden lg:flex lg:items-center lg:justify-end xl:min-w-[350px]">
+        <div className="hidden gap-3 lg:flex lg:items-center lg:justify-end xl:min-w-[350px]">
+          <FreeTransactionCounter txLeft={txLeft} maxFreeTx={10} />{" "}
           <ConnectWalletButton />
         </div>
       </Container>

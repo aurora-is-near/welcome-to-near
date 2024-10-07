@@ -53,8 +53,8 @@ const ConnectWalletButton = () => {
               <div className="text-sm font-semibold text-sand-12 sm:hidden">
                 {midTruncate(accountId)}
               </div>
-              <div className="hidden text-sm font-semibold text-sand-12 sm:block">
-                {midTruncate(accountId, 25)}
+              <div className="hidden select-none text-sm font-semibold text-sand-12 sm:block">
+                {midTruncate(accountId)}
               </div>
               <ChevronDownIcon
                 className={clsx("h-5 w-5 transform text-sand-12 duration-100", {

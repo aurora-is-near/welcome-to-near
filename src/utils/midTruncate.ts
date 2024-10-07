@@ -1,4 +1,4 @@
-const midTruncate = (value = "", maxLength = 16) => {
+const midTruncate = (value = "", maxLength = 14) => {
   if (!value) return value;
   if (value.length <= maxLength) return value;
 

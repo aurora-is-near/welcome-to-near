@@ -24,3 +24,4 @@ export { default as OKX } from "./OKX.svg";
 export { default as HTX } from "./HTX.svg";
 export { default as CopyIcon } from "./CopyIcon.svg";
 export { default as Check } from "./Check.svg";
+export { default as ArrowRigthLeft } from "./ArrowRigthLeft.svg";
