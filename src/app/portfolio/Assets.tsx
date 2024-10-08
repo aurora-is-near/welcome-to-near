@@ -11,6 +11,7 @@ import NearInfoStoragePaddingTooltip from "@/components/NearInfoStoragePaddingTo
 import { ONE_YOCTO_NEAR, WRAP_NEAR } from "@/constants/near";
 import ConvertToNear from "@/components/ConvertToNear";
 import { WalletSelector } from "@near-wallet-selector/core";
+import { parseUnits } from "viem";
 
 const Assets = () => {
   const { activeCard } = useCards();
@@ -62,7 +63,13 @@ const Assets = () => {
                     if (!balance || balance === "0") {
                       return null;
                     }
-
+                    const isWNEAR = contract === WRAP_NEAR.id;
+                    if (
+                      isWNEAR &&
+                      BigInt(balance) < parseUnits("0.001", decimals)
+                    ) {
+                      return null;
+                    }
                     const prettyBalance = prettifyValue({
                       value: formattedBalance,
                       maxDigits: TOKEN_DEFAULT_DIGITS,
@@ -98,7 +105,7 @@ const Assets = () => {
                                       symbol={symbol}
                                     />
                                   )}
-                                  {contract === WRAP_NEAR.id && (
+                                  {isWNEAR && (
                                     <ConvertToNear
                                       onClick={() =>
                                         convertWnearToNear({
