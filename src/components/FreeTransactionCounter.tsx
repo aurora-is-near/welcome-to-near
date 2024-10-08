@@ -66,7 +66,7 @@ export default function FreeTransactionCounter({
   if (txLeft === null || maxFreeTx === null) return null;
   const fillPercentage = Math.floor((txLeft / maxFreeTx) * 100);
   return (
-    <div className="relative w-[86px] overflow-hidden rounded-full border border-sand-6 bg-sand-3 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sand-12 lg:w-[182px]">
+    <div className="relative h-10 w-[86px] overflow-hidden rounded-full border border-sand-6 bg-sand-3 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sand-12 lg:w-[182px]">
       <div
         style={{
           width: `${fillPercentage}%`,
