@@ -66,6 +66,12 @@ const nextConfig = {
       },
     ];
   },
+  rewrites: async () => [
+    {
+      source: "/.well-known/walletconnect.txt",
+      destination: "/api/wc/verify",
+    },
+  ],
 };
 
 const sentryConfig = {
