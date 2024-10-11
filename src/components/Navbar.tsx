@@ -45,7 +45,11 @@ const Navbar = () => {
           </Link>
         </div>
         <div className="flex gap-3 lg:hidden">
-          <FreeTransactionCounter left={data?.left} max={data?.max} />
+          <FreeTransactionCounter
+            left={data?.left}
+            max={data?.max}
+            resetDate={data?.next_reset}
+          />
           <button
             type="button"
             className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
@@ -75,7 +79,11 @@ const Navbar = () => {
           </ul>
         </nav>
         <div className="hidden gap-3 lg:flex lg:items-center lg:justify-end xl:min-w-[350px]">
-          <FreeTransactionCounter left={data?.left} max={data?.max} />{" "}
+          <FreeTransactionCounter
+            left={data?.left}
+            max={data?.max}
+            resetDate={data?.next_reset}
+          />{" "}
           <ConnectWalletButton />
         </div>
       </Container>
