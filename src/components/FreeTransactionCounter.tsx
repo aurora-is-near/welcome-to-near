@@ -2,10 +2,17 @@ import { useWalletSelector } from "@/contexts/WalletSelectorContext";
 import { ArrowRigthLeft } from "@/icons";
 import React, { useEffect, useState } from "react";
 
-const fetchFreeTxLeft = async (accountId: string) => {
+type FreeTxData = {
+  max: number;
+  left: number;
+  next_reset: string | null;
+};
+const fetchFreeTxInfo = async (
+  accountId: string
+): Promise<FreeTxData | null> => {
   try {
     const url = process.env.ethRpcForNear;
-    if (!url) return;
+    if (!url) return null;
     const result = await fetch(url, {
       method: "POST",
       headers: {
@@ -14,7 +21,7 @@ const fetchFreeTxLeft = async (accountId: string) => {
       body: JSON.stringify({
         jsonrpc: "2.0",
         id: "1",
-        method: "near_getFreeTransactionsLeft",
+        method: "near_getFreeTransactionsInfo",
         params: [accountId],
       }),
     });
@@ -29,18 +36,18 @@ const fetchFreeTxLeft = async (accountId: string) => {
 export const useFreeTxAmount = () => {
   const { isEthereumWallet, accountId } = useWalletSelector();
 
-  const [txLeft, setTxLeft] = useState<number | null>(null);
+  const [data, setData] = useState<FreeTxData | null>(null);
 
   useEffect(() => {
     if (!accountId || isEthereumWallet === false) {
-      setTxLeft(null);
+      setData(null);
       return;
     }
 
     function getFreeTx(accountId: string) {
-      fetchFreeTxLeft(accountId).then((result) => {
-        if (Number.isNaN(Number(result))) return;
-        setTxLeft(result);
+      fetchFreeTxInfo(accountId).then((result) => {
+        if (result === null) return;
+        setData(result);
       });
     }
 
@@ -53,32 +60,32 @@ export const useFreeTxAmount = () => {
     };
   }, [accountId, isEthereumWallet]);
 
-  return txLeft;
+  return data;
 };
 
 export default function FreeTransactionCounter({
-  txLeft,
-  maxFreeTx,
+  left,
+  max,
 }: {
-  txLeft: number | null;
-  maxFreeTx: number | null;
+  left?: number;
+  max?: number;
 }) {
-  if (txLeft === null || maxFreeTx === null) return null;
-  const fillPercentage = Math.floor((txLeft / maxFreeTx) * 100);
+  if (!left || !max) return null;
+  const fillPercentage = Math.floor((left / max) * 100);
   return (
     <div className="relative h-10 w-[86px] overflow-hidden rounded-full border border-sand-6 bg-sand-3 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sand-12 lg:w-[182px]">
       <div
         style={{
           width: `${fillPercentage}%`,
         }}
-        className="-z-1 absolute bottom-0 left-0 right-0 top-0 w-[50%] rounded-full bg-green-9 opacity-70"
+        className="-z-1 absolute bottom-0 left-0 right-0 top-0 w-[50%] rounded-full bg-green-9 opacity-70 transition-[width] duration-700"
       ></div>
       <div className="relative z-10 flex h-10 w-full select-none items-center justify-center space-x-1 text-nowrap px-3 py-2">
         <ArrowRigthLeft className="text-sand-12" />
-        <span className="text-sm font-semibold text-sand-12">{txLeft}</span>
+        <span className="text-sm font-semibold text-sand-12">{left}</span>
         <span className="text-xs text-sand-10">{"/"}</span>
         <span className="text-xs text-sand-10">
-          {maxFreeTx}{" "}
+          {max}{" "}
           <span className="hidden lg:inline-block">free transactions</span>
         </span>
       </div>

@@ -32,7 +32,7 @@ const links = [
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const pathname = usePathname();
-  const txLeft = useFreeTxAmount();
+  const data = useFreeTxAmount();
   useEffect(() => setMobileMenuOpen(false), [pathname]);
 
   return (
@@ -45,7 +45,7 @@ const Navbar = () => {
           </Link>
         </div>
         <div className="flex gap-3 lg:hidden">
-          <FreeTransactionCounter txLeft={txLeft} maxFreeTx={10} />
+          <FreeTransactionCounter left={data?.left} max={data?.max} />
           <button
             type="button"
             className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
@@ -75,7 +75,7 @@ const Navbar = () => {
           </ul>
         </nav>
         <div className="hidden gap-3 lg:flex lg:items-center lg:justify-end xl:min-w-[350px]">
-          <FreeTransactionCounter txLeft={txLeft} maxFreeTx={10} />{" "}
+          <FreeTransactionCounter left={data?.left} max={data?.max} />{" "}
           <ConnectWalletButton />
         </div>
       </Container>
