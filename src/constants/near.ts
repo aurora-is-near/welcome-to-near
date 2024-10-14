@@ -88,6 +88,13 @@ const DEFAULT_TOKEN_MAINNET_LIST: TokenInfo[] = [
     icon: "/img/tokens/usn.svg",
   },
   {
+    id: "token.0xshitzu.near",
+    name: "SHITZU",
+    symbol: "SHITZU",
+    decimals: 18,
+    icon: "/img/tokens/SHITZU.webp",
+  },
+  {
     id: "token.v1.realisnetwork.near",
     name: "Realis",
     symbol: "LIS",
