@@ -47,7 +47,7 @@ export default function Home() {
 
       <div className="relative space-y-10">
         <Container as="section" className="-mt-24 grid gap-5 lg:grid-cols-2">
-          <div className="relative mx-auto flex w-full justify-between rounded-2xl bg-sand-1 p-4 shadow-custom-lg ring-1 ring-black/[0.03] sm:p-6 md:max-w-lg lg:max-w-none">
+          <div className="relative mx-auto flex w-full justify-between overflow-hidden rounded-2xl bg-sand-1 p-4 shadow-custom-lg ring-1 ring-black/[0.03] sm:p-6 md:max-w-lg lg:max-w-none">
             <NearLogo className="absolute right-12 top-1/2 h-[180px] w-[180px] -translate-y-1/2 text-sand-5 opacity-50 sm:opacity-100" />
             <div className="relative ml-2 max-w-80 py-4 sm:ml-4 sm:py-6">
               <h3 className="font-sans text-2xl font-bold leading-[1.3] text-sand-12 sm:text-3xl">
