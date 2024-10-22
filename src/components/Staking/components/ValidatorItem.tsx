@@ -28,10 +28,10 @@ export default function ValidatorItem({
       href={href}
     >
       <Avatar inputString={validator.accountId} size="lg" className="mt-1" />
-      <div className="sm:flex-row sm:justify-between flex flex-1 flex-col items-start gap-x-4 gap-y-2">
+      <div className="flex flex-1 flex-col items-start gap-x-4 gap-y-2 sm:flex-row sm:justify-between">
         <div>
           <div className="flex items-center gap-2">
-            <span className="sm:max-w-64 max-w-44 overflow-hidden overflow-ellipsis whitespace-nowrap text-base font-semibold leading-normal tracking-wider text-sand-12">
+            <span className="max-w-44 overflow-hidden overflow-ellipsis whitespace-nowrap text-base font-semibold leading-normal tracking-wider text-sand-12 sm:max-w-64">
               {validator.accountId}
             </span>
             <ActivityIndicator validator={validator} />
@@ -57,7 +57,7 @@ export default function ValidatorItem({
 
 export function TokenAmount({ validator }: { validator: Validator }) {
   return (
-    <div className="sm:items-end sm:text-right flex flex-col">
+    <div className="flex flex-col sm:items-end sm:text-right">
       <span className="text-base font-semibold leading-normal tracking-wider text-sand-12">
         {formatNearTokenAmount(validator.staked)} NEAR
       </span>

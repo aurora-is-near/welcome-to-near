@@ -44,7 +44,7 @@ const FarmingRewardsItem = ({
         size="sm"
         href={`/staking/claim/${validator.accountId}/${farm.id}`}
         style="green"
-        className="sm:w-fit w-full"
+        className="w-full sm:w-fit"
       >
         Claim
       </Button>

@@ -18,7 +18,7 @@ const Container = ({
 }: Props) => (
   <Tag
     className={clsx(
-      "sm:px-6 mx-auto w-full px-4",
+      "mx-auto w-full px-4 sm:px-6",
       maxWidthClassName,
       className
     )}

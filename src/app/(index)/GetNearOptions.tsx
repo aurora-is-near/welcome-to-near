@@ -7,7 +7,7 @@ import { ArrowTopRightOnSquareIcon } from "@heroicons/react/20/solid";
 import { Fragment } from "react";
 
 const GetNearOptions = () => (
-  <TabGroup className="sm:mt-8 mt-6 w-full">
+  <TabGroup className="mt-6 w-full sm:mt-8">
     <TabList className="grid grid-cols-2 gap-2">
       {["Bridge", "Onramps"].map((tab) => (
         <Tab key={tab} as={Fragment}>

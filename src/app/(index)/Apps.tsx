@@ -17,7 +17,7 @@ const Apps = ({ allApps, topApps }: { allApps: any[]; topApps: any[] }) => {
 
   return (
     <div className="mt-8 w-full">
-      <div className="sm:mx-0 sm:flex-wrap sm:justify-center sm:overflow-hidden sm:px-0 -mx-4 flex items-center gap-2 overflow-x-auto px-4 hide-scrollbar">
+      <div className="-mx-4 flex items-center gap-2 overflow-x-auto px-4 hide-scrollbar sm:mx-0 sm:flex-wrap sm:justify-center sm:overflow-hidden sm:px-0">
         <Button
           className="flex-shrink-0"
           onClick={() => setActiveCategory("trending")}

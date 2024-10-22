@@ -82,7 +82,7 @@ const AccountPage = () => {
             {dappAccessKeys.map((key) => (
               <li key={key.public_key}>
                 <CardPadding>
-                  <div className="sm:flex-row sm:items-center sm:justify-between flex flex-col items-start gap-x-4 gap-y-1.5">
+                  <div className="flex flex-col items-start gap-x-4 gap-y-1.5 sm:flex-row sm:items-center sm:justify-between">
                     <div className="text-base font-semibold leading-normal tracking-wider text-sand-12">
                       {
                         (
@@ -92,7 +92,7 @@ const AccountPage = () => {
                       }
                     </div>
                     <button
-                      className="sm:-mr-2 sm:ml-0 -ml-2 rounded-lg px-2 py-1 text-sm font-semibold leading-normal tracking-wider text-red-500 hover:bg-red-50 focus-visible:bg-red-50 focus-visible:outline-none"
+                      className="-ml-2 rounded-lg px-2 py-1 text-sm font-semibold leading-normal tracking-wider text-red-500 hover:bg-red-50 focus-visible:bg-red-50 focus-visible:outline-none sm:-mr-2 sm:ml-0"
                       onClick={() => onDeauthorize(key.public_key)}
                     >
                       Deauthorize

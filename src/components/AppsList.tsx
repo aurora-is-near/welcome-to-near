@@ -35,7 +35,7 @@ const AppsList = ({
           ) : null}
         </div>
       )}
-      <div className="sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 grid gap-5">
+      <div className="grid gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {displayedApps.map((app: any) => (
           <a
             key={app.name}

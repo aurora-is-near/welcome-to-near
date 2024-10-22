@@ -36,7 +36,7 @@ const Success = () => {
           </Button>
         )}
       </div>
-      <div className="sm:mt-12 sm:grid-cols-2 mt-8 grid w-full gap-2">
+      <div className="mt-8 grid w-full gap-2 sm:mt-12 sm:grid-cols-2">
         <Button
           style="dark-border"
           className="border-opacity-30"

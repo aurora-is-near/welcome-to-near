@@ -101,7 +101,7 @@ function BalanceItem({
       <div className="-mt-1 flex h-13 w-10 items-center justify-center bg-white">
         <NearLogo active={active} />
       </div>
-      <div className="sm:flex-row sm:justify-between flex flex-1 flex-col items-start gap-x-4 gap-y-2">
+      <div className="flex flex-1 flex-col items-start gap-x-4 gap-y-2 sm:flex-row sm:justify-between">
         <div>
           <p className="text-base font-semibold leading-normal tracking-wider text-sand-12">
             {amount}

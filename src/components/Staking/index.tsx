@@ -142,7 +142,7 @@ export default function Staking() {
                           validator={validator}
                           href={`/staking/${validator.accountId}`}
                           rightSide={
-                            <div className="sm:block hidden">
+                            <div className="hidden sm:block">
                               <BalanceTooltip validator={validator}>
                                 <TokenAmount validator={validator} />
                               </BalanceTooltip>

@@ -8,7 +8,7 @@
     "build": "env-cmd -e mainnet -r ./src/network-config.json next build",
     "build-testnet": "env-cmd -e testnet -r ./src/network-config.json next build",
     "start": "next start",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "lint": "next lint",
     "lint-fix": "yarn lint --fix"
   },
   "dependencies": {

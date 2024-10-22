@@ -44,16 +44,16 @@ const ConnectWalletButton = () => {
   }, [selector]);
 
   return !!accountId ? (
-    <div className="sm:justify-start flex justify-center">
+    <div className="flex justify-center sm:justify-start">
       <Menu as="div" className="relative">
         <MenuButton className="flex h-10 items-center justify-center gap-2 rounded-full border border-sand-6 bg-sand-3 py-1.5 pl-1.5 pr-3 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sand-12">
           {({ active }) => (
             <>
               <Avatar inputString={ethWalletAvatarInputFormatter(accountId)} />
-              <div className="sm:hidden text-sm font-semibold text-sand-12">
+              <div className="text-sm font-semibold text-sand-12 sm:hidden">
                 {midTruncate(accountId)}
               </div>
-              <div className="sm:block hidden select-none text-sm font-semibold text-sand-12">
+              <div className="hidden select-none text-sm font-semibold text-sand-12 sm:block">
                 {midTruncate(accountId)}
               </div>
               <ChevronDownIcon
@@ -111,7 +111,7 @@ const ConnectWalletButton = () => {
       </Menu>
     </div>
   ) : (
-    <div className="sm:flex-row flex flex-col gap-2">
+    <div className="flex flex-col gap-2 sm:flex-row">
       <Button
         size="sm"
         onClick={() => {

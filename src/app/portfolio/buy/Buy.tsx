@@ -17,7 +17,7 @@ const Buy = () => {
         </div>
       </CardPadding>
       <div className="overflow-hidden rounded-b-2xl border-t border-sand-5">
-        <div className="sm:px-8 bg-sand-3 px-4 py-4">
+        <div className="bg-sand-3 px-4 py-4 sm:px-8">
           <h3 className="font-sans text-lg font-medium leading-none text-sand-12">
             Onramps
           </h3>

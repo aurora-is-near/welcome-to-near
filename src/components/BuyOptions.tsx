@@ -92,7 +92,7 @@ const ListItem = ({
   icon: JSX.Element;
 }) => (
   <a
-    className="sm:px-8 group flex items-center justify-between gap-4 px-4 py-4 transition-colors hover:bg-sand-2"
+    className="group flex items-center justify-between gap-4 px-4 py-4 transition-colors hover:bg-sand-2 sm:px-8"
     href={url}
     target="_blank"
     rel="noreferrer noopener"

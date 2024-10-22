@@ -77,20 +77,20 @@ export default function ManualNetworkConfiguration({
       onClose={onClose}
       paddingClassName="px-5 sm:p-0"
       mobileTitle={
-        <span className="sm:hidden block text-base font-semibold tracking-[0.24px] text-sand-11">
+        <span className="block text-base font-semibold tracking-[0.24px] text-sand-11 sm:hidden">
           Manual wallet configuration
         </span>
       }
     >
       <div className="flex flex-col">
-        <div className="sm:block hidden overflow-hidden rounded-t-2xl">
+        <div className="hidden overflow-hidden rounded-t-2xl sm:block">
           <Tabs
             tabs={TABS_ARRAY}
             activeTab={activeTab}
             onClick={(value) => setActiveTab(value as NETWORKS)}
           />
         </div>
-        <div className="px sm:hidden flex flex-col items-start gap-6">
+        <div className="px flex flex-col items-start gap-6 sm:hidden">
           <div className="flex w-full flex-wrap justify-center gap-3">
             {TABS_ARRAY.map((network) => {
               const active = activeTab === network;
@@ -110,7 +110,7 @@ export default function ManualNetworkConfiguration({
             })}
           </div>
         </div>
-        <div className="sm:p-8 pt-6">
+        <div className="pt-6 sm:p-8">
           {CONFIG[activeTab].map((record, index, array) => (
             <React.Fragment key={record.type}>
               <RecordItem type={record.type} value={record.value} />
