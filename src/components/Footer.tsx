@@ -15,7 +15,7 @@ const Footer = () => {
             className="group flex select-none gap-1 rounded-full bg-sand-4 px-3 py-[6px] text-sm hover:bg-aurora-gradient"
           >
             <span className="text-sand-10 group-hover:text-black">
-              Powered by
+              Built by
             </span>
             <AuroraTriangle />
             <span className="font-semibold text-black">Aurora</span>
