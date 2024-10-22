@@ -71,18 +71,18 @@ const Modal = ({
         >
           <div
             className={clsx(
-              "absolute inset-0 inline-block h-full w-full sm:relative sm:my-8 sm:h-fit sm:max-w-lg sm:rounded-2xl sm:align-middle",
+              "sm:relative sm:my-8 sm:h-fit sm:max-w-lg sm:rounded-2xl sm:align-middle absolute inset-0 inline-block h-full w-full",
               wrapperClassName
             )}
           >
             <div
               className={clsx(
-                "h-full transform transition-all sm:rounded-2xl sm:shadow-custom-lg",
+                "sm:rounded-2xl sm:shadow-custom-lg h-full transform transition-all",
                 bgClassName,
                 paddingClassName
               )}
             >
-              <div className="flex items-center justify-between py-6 sm:hidden">
+              <div className="sm:hidden flex items-center justify-between py-6">
                 {mobileTitle}
                 {showCloseButton && (
                   <button
@@ -99,7 +99,7 @@ const Modal = ({
                 <button
                   onClick={onClose}
                   aria-label="Close modal"
-                  className="absolute -right-14 -top-3 hidden rounded-full p-2 text-sand-8 hover:bg-sand-1 hover:text-sand-12 sm:block"
+                  className="sm:block absolute -right-14 -top-3 hidden rounded-full p-2 text-sand-8 hover:bg-sand-1 hover:text-sand-12"
                 >
                   <XMarkIcon className="h-8 w-8" />
                 </button>

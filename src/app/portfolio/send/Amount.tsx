@@ -39,7 +39,7 @@ const Amount = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="overflow-hidden px-4 py-6 sm:p-8">
+      <div className="sm:p-8 overflow-hidden px-4 py-6">
         <label htmlFor="amount" className="sr-only">
           Amount to send
         </label>
@@ -120,7 +120,7 @@ const Amount = () => {
       </div>
       {selectedTokenInfo && (
         <div className="border-y border-sand-5">
-          <div className="px-4 py-4 sm:px-8">
+          <div className="sm:px-8 px-4 py-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-x-4 text-left">
                 <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center overflow-hidden rounded-full bg-sand-4">
@@ -161,7 +161,7 @@ const Amount = () => {
           </div>
         </div>
       )}
-      <div className="px-4 py-6 sm:p-8">
+      <div className="sm:p-8 px-4 py-6">
         <Button className="w-full">Continue</Button>
       </div>
     </form>

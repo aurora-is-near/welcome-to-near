@@ -30,7 +30,7 @@ const Recipient = () => {
   };
 
   return (
-    <CardPadding className="-mt-6 sm:-mt-8">
+    <CardPadding className="sm:-mt-8 -mt-6">
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
           <label htmlFor="recipient" className="sr-only">

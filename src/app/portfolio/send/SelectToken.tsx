@@ -8,7 +8,7 @@ const SelectToken = () => {
   const { next, setSelectedToken } = useSend();
 
   return (
-    <div className="pb-6 sm:pb-8">
+    <div className="sm:pb-8 pb-6">
       <div className="divide-y divide-sand-5 border-y border-sand-5">
         {tokens.map(
           ({ symbol, balance, formattedBalance, usdValue, iconSrc }) => {
@@ -27,7 +27,7 @@ const SelectToken = () => {
                   setSelectedToken(symbol);
                   next();
                 }}
-                className="inline-block w-full px-4 py-4 hover:bg-sand-2 sm:px-8"
+                className="sm:px-8 inline-block w-full px-4 py-4 hover:bg-sand-2"
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-x-4 text-left">

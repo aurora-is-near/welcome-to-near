@@ -77,8 +77,8 @@ const WalletList = ({ wallets }: { wallets: any[] }) => {
 
 const WalletsList = () => {
   return (
-    <div className="relative w-full divide-y divide-black/10 border-t border-black/15 bg-[#66DC96] xl:grid xl:grid-cols-2 xl:divide-x xl:divide-y-0">
-      <div className="flex flex-col items-center px-4 py-6 sm:px-5 md:p-7">
+    <div className="xl:grid xl:grid-cols-2 xl:divide-x xl:divide-y-0 relative w-full divide-y divide-black/10 border-t border-black/15 bg-[#66DC96]">
+      <div className="sm:px-5 md:p-7 flex flex-col items-center px-4 py-6">
         <div className="flex items-center gap-3">
           <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#041417]">
             <NearLogo className="h-3.5 w-3.5 text-white" />
@@ -91,7 +91,7 @@ const WalletsList = () => {
         <WalletList wallets={nearWallets} />
       </div>
 
-      <div className="relative flex flex-col items-center px-4 py-6 sm:px-5 md:p-7">
+      <div className="sm:px-5 md:p-7 relative flex flex-col items-center px-4 py-6">
         <div className="flex items-center gap-3">
           <EthereumLogo className="h-8 w-8" />
           <h3 className="font-sans text-xl font-medium leading-[1.3] tracking-wide text-green-12">
@@ -102,7 +102,7 @@ const WalletsList = () => {
         <WalletList wallets={ethereumWallets} />
 
         <div
-          className="absolute left-1/2 top-0 z-10 flex h-13 w-13 -translate-x-1/2 -translate-y-1/2 items-center justify-center border-none bg-[#66DC96] text-base font-semibold uppercase leading-normal tracking-wider text-green-11 xl:left-0 xl:top-1/2"
+          className="xl:left-0 xl:top-1/2 absolute left-1/2 top-0 z-10 flex h-13 w-13 -translate-x-1/2 -translate-y-1/2 items-center justify-center border-none bg-[#66DC96] text-base font-semibold uppercase leading-normal tracking-wider text-green-11"
           aria-hidden="true"
         >
           or

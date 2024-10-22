@@ -97,7 +97,7 @@ export default function FreeTransactionCounter({
       content={formattedResetDate ? `Reset on ${formattedResetDate}` : null}
       tooltipClassname="max-w-[120px] sm:max-w-none sm:w-fit text-center sm:text-nowrap"
     >
-      <div className="relative h-10 w-[86px] overflow-hidden rounded-full border border-sand-6 bg-sand-3 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sand-12 lg:w-[182px]">
+      <div className="lg:w-[182px] relative h-10 w-[86px] overflow-hidden rounded-full border border-sand-6 bg-sand-3 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sand-12">
         <div
           style={{
             width: `${fillPercentage}%`,
@@ -110,7 +110,7 @@ export default function FreeTransactionCounter({
           <span className="text-xs text-sand-10">{"/"}</span>
           <span className="text-xs text-sand-10">
             {max}{" "}
-            <span className="hidden lg:inline-block">free transactions</span>
+            <span className="lg:inline-block hidden">free transactions</span>
           </span>
         </div>
       </div>

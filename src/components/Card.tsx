@@ -13,5 +13,5 @@ export const Card = ({ children, className }: Props) => (
 );
 
 export const CardPadding = ({ children, className }: Props) => (
-  <div className={clsx("px-4 py-6 sm:p-8", className)}>{children}</div>
+  <div className={clsx("sm:p-8 px-4 py-6", className)}>{children}</div>
 );

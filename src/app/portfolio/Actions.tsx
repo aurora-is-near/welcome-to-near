@@ -65,7 +65,7 @@ const Actions = () => {
                 Available balance
               </h2>
             </div>
-            <div className="mt-8 grid gap-2.5 sm:grid-cols-3">
+            <div className="sm:grid-cols-3 mt-8 grid gap-2.5">
               {[
                 {
                   name: "Buy",
