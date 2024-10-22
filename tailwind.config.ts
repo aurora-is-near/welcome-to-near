@@ -9,10 +9,10 @@ const config: Config = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    screens: {
-      xsm: "500px",
-    },
     extend: {
+      screens: {
+        xsm: "500px",
+      },
       colors: {
         sand: {
           1: "hsl(var(--color-sand-1) / <alpha-value>)",
