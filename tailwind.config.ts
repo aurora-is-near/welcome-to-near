@@ -9,6 +9,9 @@ const config: Config = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    screens: {
+      xsm: "500px",
+    },
     extend: {
       colors: {
         sand: {
@@ -140,6 +143,9 @@ const config: Config = {
       letterSpacing: {
         wide: "0.015em",
         wider: "0.02em",
+      },
+      backgroundImage: {
+        "aurora-gradient": "linear-gradient(135deg, #5DEB5A 0%, #FDFC47 100%);",
       },
     },
   },
