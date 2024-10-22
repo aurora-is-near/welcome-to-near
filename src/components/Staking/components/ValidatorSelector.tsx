@@ -49,7 +49,7 @@ export default function ValidatorSelector({
         </div>
       </CardPadding>
 
-      <CardPadding className="h-fit max-h-[570px] overflow-y-auto overflow-x-hidden sm:max-h-[730px]">
+      <CardPadding className="sm:max-h-[730px] h-fit max-h-[570px] overflow-y-auto overflow-x-hidden">
         {(() => {
           if (loading) {
             return (
@@ -78,7 +78,7 @@ export default function ValidatorSelector({
                     <Button
                       style="light-border"
                       size="sm"
-                      className="hidden !text-sand-12 sm:block"
+                      className="sm:block hidden !text-sand-12"
                     >
                       Select
                     </Button>
