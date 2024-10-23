@@ -29,6 +29,11 @@ const ethereumWallets = [
     imgUrl: "/img/wallets/brave.svg",
   },
   {
+    name: "Aurora Pass",
+    url: "https://auroracloud.dev/pass",
+    imgUrl: "/img/wallets/aurorapass.png",
+  },
+  {
     name: "Rabby Wallet",
     url: "https://rabby.io/",
     imgUrl: "/img/wallets/rabby.png",
