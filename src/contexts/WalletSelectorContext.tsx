@@ -11,6 +11,8 @@ import { setupMyNearWallet } from "@near-wallet-selector/my-near-wallet";
 import { setupWalletConnect } from "@near-wallet-selector/wallet-connect";
 import { setupEthereumWallets } from "@near-wallet-selector/ethereum-wallets";
 import { setupMeteorWallet } from "@near-wallet-selector/meteor-wallet";
+import { setupHereWallet } from "@near-wallet-selector/here-wallet";
+import { setupNearMobileWallet } from "@near-wallet-selector/near-mobile-wallet";
 import type { ReactNode } from "react";
 import React, {
   useCallback,
@@ -138,6 +140,7 @@ export const WalletSelectorContextProvider: React.FC<{
           wagmiConfig,
           web3Modal,
           alwaysOnboardDuringSignIn: true,
+          skipSignInAccessKey: true,
         }),
         setupWalletConnect({
           projectId: projectId,
@@ -151,9 +154,16 @@ export const WalletSelectorContextProvider: React.FC<{
           ],
         }),
         setupMeteorWallet(),
+        setupHereWallet(),
+        setupNearMobileWallet(),
       ],
     });
-    const _modal = setupModal(_selector, { contractId: "" });
+    // const _modal = setupModal(_selector, { contractId: "" });
+    // NOTE: We use an acces key to be compatible with all NEAR wallets,
+    // but skip the login access key when possible, for example skipSignInAccessKey with setupEthereumWallets.
+    const _modal = setupModal(_selector, {
+      contractId: IS_MAINNET ? "welcome-to.near" : "welcome-to-near.testnet",
+    });
     const state = _selector.store.getState();
     setAccounts(state.accounts);
     setSelector(_selector);
