@@ -21,7 +21,6 @@
     "@near-wallet-selector/meteor-wallet": "8.9.14",
     "@near-wallet-selector/modal-ui": "8.9.14",
     "@near-wallet-selector/my-near-wallet": "8.9.14",
-    "@near-wallet-selector/near-mobile-wallet": "8.9.14",
     "@near-wallet-selector/wallet-connect": "8.9.14",
     "@near-wallet-selector/wallet-utils": "8.9.14",
     "@ref-finance/ref-sdk": "1.4.0",

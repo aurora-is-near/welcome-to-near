@@ -12,7 +12,6 @@ import { setupWalletConnect } from "@near-wallet-selector/wallet-connect";
 import { setupEthereumWallets } from "@near-wallet-selector/ethereum-wallets";
 import { setupMeteorWallet } from "@near-wallet-selector/meteor-wallet";
 import { setupHereWallet } from "@near-wallet-selector/here-wallet";
-import { setupNearMobileWallet } from "@near-wallet-selector/near-mobile-wallet";
 import type { ReactNode } from "react";
 import React, {
   useCallback,
@@ -155,7 +154,6 @@ export const WalletSelectorContextProvider: React.FC<{
         }),
         setupMeteorWallet(),
         setupHereWallet(),
-        setupNearMobileWallet(),
       ],
     });
     // const _modal = setupModal(_selector, { contractId: "" });
