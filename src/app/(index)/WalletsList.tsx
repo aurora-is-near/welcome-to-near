@@ -11,6 +11,11 @@ const nearWallets = [
     imgUrl: "/img/wallets/mynearwallet.png",
   },
   {
+    name: "HERE wallet",
+    url: "https://www.herewallet.app",
+    imgUrl: "/img/wallets/here-wallet.png",
+  },
+  {
     name: "Meteor",
     url: "https://wallet.meteorwallet.app",
     imgUrl: "/img/wallets/meteor.png",
