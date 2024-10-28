@@ -10,36 +10,39 @@ import {
 import { DEFAULT_TOKENS_LIST } from "@/constants/near";
 import { sendGaEvent } from "@/utils/googleAnalytics";
 
-function adjustGasForSwap(transactionsRef: Transaction[]) {
-  for (let i = 0; i < transactionsRef.length; i++) {
-    const tx = transactionsRef[i];
-    for (let y = 0; y < tx.functionCalls.length; y++) {
-      const action = tx.functionCalls[y];
-      if (action.methodName === "ft_transfer_call") {
-        action.gas = "100000000000000";
-        return;
-      }
-    }
-  }
-}
+const SUCCESS = "success";
+const FAIL = "fail";
+type WidgetState = typeof SUCCESS | typeof FAIL | null;
 
 const Swap: React.FC = () => {
   const { selector, modal, accountId } = useWalletSelector();
-  const [swapState, setSwapState] = React.useState<"success" | "fail" | null>(
-    null
-  );
+  const [swapState, setSwapState] = React.useState<WidgetState>(null);
+  const [tx, setTx] = React.useState<string | undefined>();
   const swapInProgress = useRef(false);
+
   const onSwap = async (transactionsRef: Transaction[]) => {
     try {
-      if (swapInProgress.current) return;
+      if (swapInProgress.current || transactionsRef.length === 0) return;
       swapInProgress.current = true;
       const wallet = await selector.wallet();
       if (!accountId) throw NotLoginError;
 
-      //adjust gas for swap
-      adjustGasForSwap(transactionsRef);
+      let ftTransferCallIndex: number = transactionsRef.length - 1;
+      //adjust gas for swap and find ft_transfer_call to display a link to
+      for (let i = 0; i < transactionsRef.length; i++) {
+        const tx = transactionsRef[i];
 
-      await wallet
+        for (let y = 0; y < tx.functionCalls.length; y++) {
+          const action = tx.functionCalls[y];
+          if (action.methodName === "ft_transfer_call") {
+            action.gas = "100000000000000";
+            ftTransferCallIndex = i;
+            break;
+          }
+        }
+      }
+
+      const result = await wallet
         .signAndSendTransactions(
           WalletSelectorTransactions(transactionsRef, accountId)
         )
@@ -47,13 +50,15 @@ const Swap: React.FC = () => {
           swapInProgress.current = false;
         });
 
-      setSwapState("success");
+      setSwapState(SUCCESS);
+      setTx(result ? result[ftTransferCallIndex].transaction.hash : undefined);
       sendGaEvent({
         name: "swap",
         parameters: { status: "success" },
       });
     } catch (e) {
-      setSwapState("fail");
+      setSwapState(FAIL);
+      setTx(undefined);
       sendGaEvent({
         name: "swap",
         parameters: { status: "fail" },
@@ -81,9 +86,10 @@ const Swap: React.FC = () => {
   const transactionState = useMemo(() => {
     return {
       state: swapState,
+      tx,
       setState: setSwapState,
     };
-  }, [swapState]);
+  }, [swapState, tx]);
 
   return (
     <SwapWidget
