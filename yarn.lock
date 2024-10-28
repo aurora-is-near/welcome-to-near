@@ -20,6 +20,18 @@
     "@jridgewell/gen-mapping" "^0.3.5"
     "@jridgewell/trace-mapping" "^0.3.24"
 
+"@aurora-is-near/ethereum-wallets@1.0.0-alpha.23":
+  version "1.0.0-alpha.23"
+  resolved "https://registry.yarnpkg.com/@aurora-is-near/ethereum-wallets/-/ethereum-wallets-1.0.0-alpha.23.tgz#305b54f3f1dccdb0511686a715cf85d6e56a1262"
+  integrity sha512-12t0ApoDhw6zGu6xZCWqM1LNRvNFvfADHlrK1gEfzqWTc+NbLohCVEeROouN8n4UyhRIsqMtiP0u7B2oPiAAvQ==
+  dependencies:
+    "@near-wallet-selector/core" "8.9.14"
+    "@near-wallet-selector/wallet-utils" "8.9.14"
+    "@wagmi/core" "2.11.6"
+    bs58 "5.0.0"
+    near-api-js "4.0.3"
+    viem "2.16.2"
+
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.24.7":
   version "7.24.7"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.24.7.tgz#882fd9e09e8ee324e496bd040401c6f046ef4465"
