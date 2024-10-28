@@ -10,7 +10,7 @@ import {
 import Button from "@/components/Button";
 import prettifyValue from "@/utils/prettifyValue";
 import { useTokens } from "../useTokens";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { parseUnits } from "viem";
 import {
   FT_STORAGE_DEPOSIT_GAS,
@@ -48,7 +48,13 @@ const Confirm = () => {
     checkIfReceiverExistsOrFounded();
   }, [recipient]);
 
-  const tokenUsdValue = selectedTokenInfo?.usdValue || 0;
+  const tokenUsdValue = useMemo(() => {
+    try {
+      return Number(selectedTokenInfo?.usdPrice || 0) * Number(amount);
+    } catch {
+      return 0;
+    }
+  }, [selectedTokenInfo, amount]);
 
   const transferNearToken = async () => {
     if (selector === null) return;
@@ -215,13 +221,15 @@ const Confirm = () => {
             <div className="text-xs font-semibold leading-[1.4] tracking-wider text-sand-12">
               {amount} {selectedTokenInfo?.symbol}
             </div>
-            <div className="mt-0.5 text-xs leading-[1.4] tracking-wider text-sand-11">
-              $
-              {prettifyValue({
-                value: tokenUsdValue,
-                maxDigits: 4,
-              })}
-            </div>
+            {tokenUsdValue && tokenUsdValue > 0 && (
+              <div className="mt-0.5 text-xs leading-[1.4] tracking-wider text-sand-11">
+                $
+                {prettifyValue({
+                  value: tokenUsdValue,
+                  maxDigits: 4,
+                })}
+              </div>
+            )}
           </dd>
         </div>
       </dl>
