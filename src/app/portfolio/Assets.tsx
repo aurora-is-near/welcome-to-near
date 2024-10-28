@@ -19,16 +19,10 @@ const Assets = () => {
   const { accountId, selector } = useWalletSelector();
 
   if (!accountId) return <ConnectAccount />;
-  if (!isLoading && tokens.length === 0) return null;
+  if ((!isLoading && tokens.length === 0) || activeCard) return null;
 
   return (
-    <motion.div
-      animate={{
-        height: Boolean(activeCard) ? 0 : "auto",
-        y: Boolean(activeCard) ? -50 : 0,
-        opacity: Boolean(activeCard) ? 0 : 1,
-      }}
-    >
+    <motion.div>
       <Card>
         <CardPadding>
           <h2 className="font-sans text-2xl font-medium leading-[1.3] text-sand-12">
