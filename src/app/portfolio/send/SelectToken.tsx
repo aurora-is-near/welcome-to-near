@@ -2,6 +2,8 @@ import prettifyValue, { TOKEN_DEFAULT_DIGITS } from "@/utils/prettifyValue";
 import Image from "next/image";
 import { useTokens } from "../useTokens";
 import { useSend } from "./Send";
+import { WRAP_NEAR } from "@/constants/near";
+import { parseUnits } from "viem";
 
 const SelectToken = () => {
   const { tokens } = useTokens();
@@ -11,7 +13,18 @@ const SelectToken = () => {
     <div className="pb-6 sm:pb-8">
       <div className="divide-y divide-sand-5 border-y border-sand-5">
         {tokens.map(
-          ({ symbol, balance, formattedBalance, usdValue, iconSrc }) => {
+          ({
+            symbol,
+            balance,
+            formattedBalance,
+            usdValue,
+            iconSrc,
+            contract,
+          }) => {
+            const isWNEAR = contract === WRAP_NEAR.id;
+            if (isWNEAR && BigInt(balance) < parseUnits("0.001", 24)) {
+              return null;
+            }
             if (!balance || balance === "0") return null;
 
             const prettyBalance = prettifyValue({

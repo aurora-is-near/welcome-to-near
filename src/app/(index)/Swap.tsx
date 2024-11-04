@@ -76,7 +76,7 @@ const Swap: React.FC = () => {
     const wallet = await selector.wallet();
 
     wallet.signOut().catch((err) => {
-      console.log("Failed to sign out");
+      console.error("Failed to sign out");
       console.error(err);
     });
   };
