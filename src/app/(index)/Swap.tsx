@@ -9,14 +9,11 @@ import {
 } from "@ref-finance/ref-sdk";
 import { DEFAULT_TOKENS_LIST } from "@/constants/near";
 import { sendGaEvent } from "@/utils/googleAnalytics";
-
-const SUCCESS = "success";
-const FAIL = "fail";
-type WidgetState = typeof SUCCESS | typeof FAIL | null;
+import { SwapState } from "@ref-finance/ref-sdk/dist/swap-widget/types";
 
 const Swap: React.FC = () => {
   const { selector, modal, accountId } = useWalletSelector();
-  const [swapState, setSwapState] = React.useState<WidgetState>(null);
+  const [swapState, setSwapState] = React.useState<SwapState>(null);
   const [tx, setTx] = React.useState<string | undefined>();
   const swapInProgress = useRef(false);
 
@@ -50,14 +47,19 @@ const Swap: React.FC = () => {
           swapInProgress.current = false;
         });
 
-      setSwapState(SUCCESS);
+      setSwapState("success");
       setTx(result ? result[ftTransferCallIndex].transaction.hash : undefined);
       sendGaEvent({
         name: "swap",
         parameters: { status: "success" },
       });
-    } catch (e) {
-      setSwapState(FAIL);
+    } catch (error) {
+      if (error === "User canceled Ethereum wallet transaction(s).") {
+        setSwapState(null);
+        setTx(undefined);
+        return;
+      }
+      setSwapState("fail");
       setTx(undefined);
       sendGaEvent({
         name: "swap",
@@ -103,6 +105,7 @@ const Swap: React.FC = () => {
       onConnect={handleSignIn}
       defaultTokenList={DEFAULT_TOKENS_LIST}
       defaultTokenIn="NEAR"
+      minNearAmountLeftForGasFees={0.02}
     />
   );
 };
