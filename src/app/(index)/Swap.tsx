@@ -1,5 +1,5 @@
 "use client";
-import React, { useMemo, useRef } from "react";
+import React, { useEffect, useMemo, useRef } from "react";
 import { useWalletSelector } from "@/contexts/WalletSelectorContext";
 import { SwapWidget, Transaction } from "@ref-finance/ref-sdk";
 
@@ -10,12 +10,37 @@ import {
 import { DEFAULT_TOKENS_LIST } from "@/constants/near";
 import { sendGaEvent } from "@/utils/googleAnalytics";
 import { SwapState } from "@ref-finance/ref-sdk/dist/swap-widget/types";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 const Swap: React.FC = () => {
   const { selector, modal, accountId } = useWalletSelector();
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
+  const txHash = searchParams.get("transactionHashes");
   const [swapState, setSwapState] = React.useState<SwapState>(null);
   const [tx, setTx] = React.useState<string | undefined>();
   const swapInProgress = useRef(false);
+
+  // Show success screen after coming back from MyNearWallet
+  useEffect(() => {
+    if (txHash) {
+      setSwapState("success");
+      setTx(txHash);
+
+      const newParams = new URLSearchParams(searchParams.toString());
+      newParams.delete("transactionHashes");
+
+      const newParamsString = newParams.toString();
+
+      router.replace(
+        pathname + newParamsString ? `?${newParamsString}#swap` : "#swap",
+        {
+          scroll: true,
+        }
+      );
+    }
+  }, [txHash]);
 
   const onSwap = async (transactionsRef: Transaction[]) => {
     try {
@@ -47,8 +72,12 @@ const Swap: React.FC = () => {
           swapInProgress.current = false;
         });
 
-      setSwapState("success");
-      setTx(result ? result[ftTransferCallIndex].transaction.hash : undefined);
+      if (selector.store.getState().selectedWalletId !== "my-near-wallet") {
+        setSwapState("success");
+        setTx(
+          result ? result[ftTransferCallIndex].transaction.hash : undefined
+        );
+      }
       sendGaEvent({
         name: "swap",
         parameters: { status: "success" },

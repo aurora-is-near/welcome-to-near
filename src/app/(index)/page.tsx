@@ -228,7 +228,7 @@ export default function Home() {
                 We find the best price route for your swap by aggregating all
                 the major liquidity sources on NEAR. Try your first swap now!
               </p>
-              <div className="mt-6 w-full max-w-[480px] sm:mt-8">
+              <div className="mt-6 w-full max-w-[480px] sm:mt-8" id="swap">
                 <Swap />
               </div>
             </div>
