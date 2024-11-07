@@ -13,7 +13,6 @@ declare namespace NodeJS {
     NEXT_PUBLIC_SENTRY_DSN: string;
     NEXT_PUBLIC_CUSTOM_NEAR_RPC: string;
     WC_DOMAIN_VERIFICATION_CODE: string;
-    COMING_SOON: string;
     nearEnv: string;
     explorerUrl: string;
     walletExplorerUrl: string;

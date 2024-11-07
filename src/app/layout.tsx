@@ -8,7 +8,6 @@ import localFont from "next/font/local";
 import getWebsiteUrl from "@/utils/getWebsiteUrl";
 import CookiesConsent from "@/components/CookiesConsent";
 import type { Viewport } from "next";
-import ComingSoon from "./ComingSoon";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -153,10 +152,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  if (process.env.COMING_SOON === "true") {
-    return <ComingSoon />;
-  }
-
   return (
     <html lang="en" className="scroll-smooth">
       <body

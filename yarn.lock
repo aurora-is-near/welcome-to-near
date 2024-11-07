@@ -2096,18 +2096,6 @@
   dependencies:
     rxjs "^7.8.0"
 
-"@near-wallet-selector/ethereum-wallets@8.9.14":
-  version "8.9.14"
-  resolved "https://registry.yarnpkg.com/@near-wallet-selector/ethereum-wallets/-/ethereum-wallets-8.9.14.tgz#2fff37ff9bc4247976bd69e136ccdcef2edd9cff"
-  integrity sha512-of1Jg6jSbp2oJ1QyYficwFNhI1gOgAOk283zjAZQKksFNnHZNspX1Beg6ZPpeNeFVxU/Wstb43xUCdWaMi+VAA==
-  dependencies:
-    "@near-wallet-selector/core" "8.9.14"
-    "@near-wallet-selector/wallet-utils" "8.9.14"
-    "@wagmi/core" "2.11.6"
-    bs58 "5.0.0"
-    near-api-js "4.0.3"
-    viem "2.16.2"
-
 "@near-wallet-selector/here-wallet@8.9.14":
   version "8.9.14"
   resolved "https://registry.yarnpkg.com/@near-wallet-selector/here-wallet/-/here-wallet-8.9.14.tgz#6e0368bc32e0a1c321c23a85a7f7431a5ecf041b"
