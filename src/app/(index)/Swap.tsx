@@ -7,10 +7,24 @@ import {
   WalletSelectorTransactions,
   NotLoginError,
 } from "@ref-finance/ref-sdk";
-import { DEFAULT_TOKENS_LIST } from "@/constants/near";
+import {
+  DEFAULT_TOKENS_LIST,
+  WRAP_NEAR_MAINNET,
+  WRAP_NEAR_TESTNET,
+} from "@/constants/near";
 import { sendGaEvent } from "@/utils/googleAnalytics";
 import { SwapState } from "@ref-finance/ref-sdk/dist/swap-widget/types";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { IS_MAINNET } from "@/constants";
+
+const REF_DEFAULT_TOKEN_IN = IS_MAINNET
+  ? WRAP_NEAR_MAINNET.id
+  : WRAP_NEAR_TESTNET.id;
+
+const REF_DEFAULT_TOKEN_OUT = IS_MAINNET
+  ? //aurora
+    "aaaaaa20d9e0e2461697782ef11675f668207961.factory.bridge.near"
+  : "ref.fakes.testnet";
 
 const Swap: React.FC = () => {
   const { selector, modal, accountId } = useWalletSelector();
@@ -133,7 +147,8 @@ const Swap: React.FC = () => {
       transactionState={transactionState}
       onConnect={handleSignIn}
       defaultTokenList={DEFAULT_TOKENS_LIST}
-      defaultTokenIn="NEAR"
+      defaultTokenIn={REF_DEFAULT_TOKEN_IN}
+      defaultTokenOut={REF_DEFAULT_TOKEN_OUT}
       minNearAmountLeftForGasFees={0.02}
     />
   );

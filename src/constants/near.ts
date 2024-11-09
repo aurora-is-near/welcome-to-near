@@ -16,7 +16,7 @@ type TokenInfo = {
   icon: string;
 };
 
-const WRAP_NEAR_MAINNET = {
+export const WRAP_NEAR_MAINNET = {
   id: "wrap.near",
   name: "Wrapped NEAR fungible token",
   symbol: "wNEAR",
@@ -24,7 +24,7 @@ const WRAP_NEAR_MAINNET = {
   icon: "/img/tokens/near.png",
 };
 
-const WRAP_NEAR_TESTNET = {
+export const WRAP_NEAR_TESTNET = {
   id: "wrap.testnet",
   symbol: "wNEAR",
   name: "wNEAR",
