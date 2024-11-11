@@ -223,7 +223,7 @@ export const WalletSelectorContextProvider: React.FC<{
 
     const isEthereumWallet = activeWallet === ETHEREUM_WALLETS_CONNECTOR;
     const isMyNearWallet = activeWallet === MY_NEAR_WALLET_CONNECTOR;
-    const balancePadding = !isEthereumWallet
+    const balancePadding = isMyNearWallet
       ? BIGGER_MAX_AMOUNT_PADDING
       : DEFAULT_MAX_AMOUNT_PADDING;
     return {
