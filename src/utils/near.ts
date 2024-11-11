@@ -74,9 +74,6 @@ export async function nep141Balance(
       methodName: "ft_balance_of",
       args: { account_id: accountId },
     });
-    console.log(
-      `ft_balance_of ${contractId} for ${accountId} is ${storageBalance}`
-    );
     return storageBalance;
   } catch (e) {
     console.warn(

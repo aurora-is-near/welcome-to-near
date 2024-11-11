@@ -7,7 +7,10 @@ import ActionStep from "./components/ActionStep";
 import { useFinance } from "@/contexts/FinanceContext";
 import BN from "bn.js";
 import { utils } from "near-api-js";
-import { useWalletSelector } from "@/contexts/WalletSelectorContext";
+import {
+  MY_NEAR_WALLET_CONNECTOR,
+  useWalletSelector,
+} from "@/contexts/WalletSelectorContext";
 import {
   FARMING_CLAIM_GAS,
   FT_STORAGE_DEPOSIT_GAS,
@@ -57,7 +60,7 @@ type Props =
 
 export default function Action({ action, actionData }: Props) {
   const { validators, state, updateAfterAction } = useStaking();
-  const { accountId } = useWalletSelector();
+  const { accountId, activeWalletId } = useWalletSelector();
   const { accountState, updateAccountState } = useFinance();
   const { selector } = useWalletSelector();
   const router = useRouter();
@@ -238,7 +241,9 @@ export default function Action({ action, actionData }: Props) {
                 },
               ],
             });
-
+            if (activeWalletId === MY_NEAR_WALLET_CONNECTOR) {
+              return;
+            }
             if (!result) throw { errorMessage: "Failed to stake" };
             console.log("stakeAndDepositTx", result);
             if (isMax) setCanRepeatAction(false);
@@ -374,6 +379,10 @@ export default function Action({ action, actionData }: Props) {
                 },
               ],
             });
+
+            if (activeWalletId === MY_NEAR_WALLET_CONNECTOR) {
+              return;
+            }
 
             if (!result) throw { errorMessage: "Failed to unstake" };
             console.log("unstake tx", result);
@@ -514,6 +523,9 @@ export default function Action({ action, actionData }: Props) {
               ],
             });
 
+            if (activeWalletId === MY_NEAR_WALLET_CONNECTOR) {
+              return;
+            }
             if (!result) throw { errorMessage: "Failed to withdraw" };
             console.log("withdraw tx", result);
             if (isMax) setCanRepeatAction(false);
@@ -635,6 +647,10 @@ export default function Action({ action, actionData }: Props) {
                 transactions,
               });
 
+              if (activeWalletId === MY_NEAR_WALLET_CONNECTOR) {
+                return;
+              }
+
               if (!result) throw { errorMessage: "Failed to claim" };
               const claimTx = result[result.length - 1];
               console.log("claim tx", claimTx);
@@ -682,7 +698,7 @@ export default function Action({ action, actionData }: Props) {
       successDescriptionText,
       tokenIcon,
     };
-  }, [action, accountState, currentValidator, actionData]);
+  }, [action, accountState, currentValidator, actionData, activeWalletId]);
 
   if (!actionInProgress && (!currentValidator || accountState === null))
     return <ActionLoading />;

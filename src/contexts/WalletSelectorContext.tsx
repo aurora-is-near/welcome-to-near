@@ -43,9 +43,11 @@ interface WalletSelectorContextValue {
   accountId: string | null;
   loading: boolean;
   isEthereumWallet: boolean;
+  activeWalletId: string | null;
 }
 
 export const ETHEREUM_WALLETS_CONNECTOR = "ethereum-wallets";
+export const MY_NEAR_WALLET_CONNECTOR = "my-near-wallet";
 const WalletSelectorContext =
   React.createContext<WalletSelectorContextValue | null>(null);
 
@@ -209,6 +211,9 @@ export const WalletSelectorContextProvider: React.FC<{
   const walletSelectorContextValue = useMemo<WalletSelectorContextValue>(() => {
     let account = accounts.find((account) => account.active) || null;
     let accountId = account ? account.accountId : null;
+    const activeWallet = selector
+      ? selector.store.getState().selectedWalletId
+      : null;
 
     return {
       selector: selector!,
@@ -217,10 +222,8 @@ export const WalletSelectorContextProvider: React.FC<{
       account,
       accountId,
       loading,
-      isEthereumWallet: selector
-        ? selector.store.getState().selectedWalletId ===
-          ETHEREUM_WALLETS_CONNECTOR
-        : false,
+      isEthereumWallet: activeWallet === ETHEREUM_WALLETS_CONNECTOR,
+      activeWalletId: activeWallet,
     };
   }, [selector, modal, accounts, loading]);
 

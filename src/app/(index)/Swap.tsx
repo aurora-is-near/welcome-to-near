@@ -1,6 +1,9 @@
 "use client";
 import React, { useEffect, useMemo, useRef } from "react";
-import { useWalletSelector } from "@/contexts/WalletSelectorContext";
+import {
+  MY_NEAR_WALLET_CONNECTOR,
+  useWalletSelector,
+} from "@/contexts/WalletSelectorContext";
 import { SwapWidget, Transaction } from "@ref-finance/ref-sdk";
 
 import {
@@ -27,7 +30,7 @@ const REF_DEFAULT_TOKEN_OUT = IS_MAINNET
   : "ref.fakes.testnet";
 
 const Swap: React.FC = () => {
-  const { selector, modal, accountId } = useWalletSelector();
+  const { selector, modal, accountId, activeWalletId } = useWalletSelector();
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
@@ -86,7 +89,7 @@ const Swap: React.FC = () => {
           swapInProgress.current = false;
         });
 
-      if (selector.store.getState().selectedWalletId !== "my-near-wallet") {
+      if (activeWalletId !== MY_NEAR_WALLET_CONNECTOR) {
         setSwapState("success");
         setTx(
           result ? result[ftTransferCallIndex].transaction.hash : undefined
