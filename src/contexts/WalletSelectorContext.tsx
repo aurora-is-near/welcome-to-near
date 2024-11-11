@@ -34,6 +34,10 @@ import { type Chain } from "@wagmi/core/chains";
 import { injected, walletConnect } from "@wagmi/connectors";
 import { IS_MAINNET } from "@/constants";
 import getWebsiteUrl from "@/utils/getWebsiteUrl";
+import {
+  DEFAULT_MAX_AMOUNT_PADDING,
+  BIGGER_MAX_AMOUNT_PADDING,
+} from "@/constants/near";
 
 interface WalletSelectorContextValue {
   selector: WalletSelector;
@@ -43,7 +47,9 @@ interface WalletSelectorContextValue {
   accountId: string | null;
   loading: boolean;
   isEthereumWallet: boolean;
+  isMyNearWallet: boolean;
   activeWalletId: string | null;
+  balancePadding: string;
 }
 
 export const ETHEREUM_WALLETS_CONNECTOR = "ethereum-wallets";
@@ -215,6 +221,11 @@ export const WalletSelectorContextProvider: React.FC<{
       ? selector.store.getState().selectedWalletId
       : null;
 
+    const isEthereumWallet = activeWallet === ETHEREUM_WALLETS_CONNECTOR;
+    const isMyNearWallet = activeWallet === MY_NEAR_WALLET_CONNECTOR;
+    const balancePadding = !isEthereumWallet
+      ? BIGGER_MAX_AMOUNT_PADDING
+      : DEFAULT_MAX_AMOUNT_PADDING;
     return {
       selector: selector!,
       modal: modal!,
@@ -222,8 +233,10 @@ export const WalletSelectorContextProvider: React.FC<{
       account,
       accountId,
       loading,
-      isEthereumWallet: activeWallet === ETHEREUM_WALLETS_CONNECTOR,
+      isEthereumWallet,
+      isMyNearWallet,
       activeWalletId: activeWallet,
+      balancePadding,
     };
   }, [selector, modal, accounts, loading]);
 

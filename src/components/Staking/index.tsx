@@ -20,7 +20,7 @@ import FarmingRewardsItem from "./components/FarmingRewardsItem";
 export const DEFAULT_NEAR_VALUE = "0 NEAR";
 
 export default function Staking() {
-  const { accountId } = useWalletSelector();
+  const { accountId, balancePadding } = useWalletSelector();
   const accountConnected = accountId !== null;
   const { accountState, isLoading } = useFinance();
   const {
@@ -69,6 +69,7 @@ export default function Staking() {
     <>
       <Balance
         balance={formattedCurrentNearBalance}
+        balancePadding={balancePadding}
         loading={isLoading}
         hasNear={Boolean(accountState?.hasNear)}
         loadingValidators={loading && accountConnected}

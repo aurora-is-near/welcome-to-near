@@ -16,7 +16,7 @@ import { parseUnits } from "viem";
 const Assets = () => {
   const { activeCard } = useCards();
   const { tokens, isLoading, refetch } = useTokens();
-  const { accountId, selector } = useWalletSelector();
+  const { accountId, selector, balancePadding } = useWalletSelector();
 
   if (!accountId) return <ConnectAccount />;
   if ((!isLoading && tokens.length === 0) || activeCard) return null;
@@ -113,7 +113,9 @@ const Assets = () => {
                                   )}
                                 </div>
                                 {symbol === "NEAR" ? (
-                                  <NearInfoStoragePaddingTooltip />
+                                  <NearInfoStoragePaddingTooltip
+                                    balancePadding={balancePadding}
+                                  />
                                 ) : null}
                               </div>
                             </div>

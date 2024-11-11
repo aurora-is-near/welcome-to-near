@@ -12,6 +12,7 @@ export default function Balance({
   hasNear,
   stakeHref,
   accountConnected,
+  balancePadding,
 }: {
   balance: number | null;
   loading: boolean;
@@ -19,6 +20,7 @@ export default function Balance({
   loadingValidators: boolean;
   hasNear: boolean;
   stakeHref: string;
+  balancePadding: string;
 }) {
   return (
     <Card className="relative">
@@ -36,7 +38,9 @@ export default function Balance({
             <h2 className="text-sm font-semibold leading-normal tracking-wider text-sand-11">
               Available balance
             </h2>
-            {accountConnected && <NearInfoStoragePaddingTooltip />}
+            {accountConnected && (
+              <NearInfoStoragePaddingTooltip balancePadding={balancePadding} />
+            )}
           </div>
         </div>
         <Button

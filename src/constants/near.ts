@@ -7,7 +7,9 @@ export const FT_MINIMUM_STORAGE_BALANCE_LARGE = "12500000000000000000000";
 export const STAKE_AND_DEPOSIT_GAS = "50000000000000";
 export const FARMING_CLAIM_GAS = "150000000000000";
 export const MIN_DISPLAY_YOCTO = "100";
-export const NEAR_MAX_AMOUNT_PADDING = "0.0125";
+export const DEFAULT_MAX_AMOUNT_PADDING = "0.0125";
+export const BIGGER_MAX_AMOUNT_PADDING = "0.07";
+
 type TokenInfo = {
   id: string;
   name: string;

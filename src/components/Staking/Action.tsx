@@ -60,7 +60,7 @@ type Props =
 
 export default function Action({ action, actionData }: Props) {
   const { validators, state, updateAfterAction } = useStaking();
-  const { accountId, activeWalletId } = useWalletSelector();
+  const { accountId, isMyNearWallet } = useWalletSelector();
   const { accountState, updateAccountState } = useFinance();
   const { selector } = useWalletSelector();
   const router = useRouter();
@@ -241,7 +241,7 @@ export default function Action({ action, actionData }: Props) {
                 },
               ],
             });
-            if (activeWalletId === MY_NEAR_WALLET_CONNECTOR) {
+            if (isMyNearWallet) {
               return;
             }
             if (!result) throw { errorMessage: "Failed to stake" };
@@ -380,7 +380,7 @@ export default function Action({ action, actionData }: Props) {
               ],
             });
 
-            if (activeWalletId === MY_NEAR_WALLET_CONNECTOR) {
+            if (isMyNearWallet) {
               return;
             }
 
@@ -523,7 +523,7 @@ export default function Action({ action, actionData }: Props) {
               ],
             });
 
-            if (activeWalletId === MY_NEAR_WALLET_CONNECTOR) {
+            if (isMyNearWallet) {
               return;
             }
             if (!result) throw { errorMessage: "Failed to withdraw" };
@@ -647,7 +647,7 @@ export default function Action({ action, actionData }: Props) {
                 transactions,
               });
 
-              if (activeWalletId === MY_NEAR_WALLET_CONNECTOR) {
+              if (isMyNearWallet) {
                 return;
               }
 
@@ -698,7 +698,7 @@ export default function Action({ action, actionData }: Props) {
       successDescriptionText,
       tokenIcon,
     };
-  }, [action, accountState, currentValidator, actionData, activeWalletId]);
+  }, [action, accountState, currentValidator, actionData, isMyNearWallet]);
 
   if (!actionInProgress && (!currentValidator || accountState === null))
     return <ActionLoading />;

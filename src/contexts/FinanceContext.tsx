@@ -5,7 +5,6 @@ import BN from "bn.js";
 import { AccountBalance } from "near-api-js/lib/account";
 import { QueryObserverResult, useQuery } from "@tanstack/react-query";
 import { utils } from "near-api-js";
-import { NEAR_MAX_AMOUNT_PADDING } from "@/constants/near";
 
 export interface FinanceData extends AccountBalance {
   hasNear: boolean;
@@ -29,7 +28,7 @@ export const useFinance = () => {
 };
 
 export function FinanceProvider({ children }: { children: ReactNode }) {
-  const { accountId } = useWalletSelector();
+  const { accountId, balancePadding } = useWalletSelector();
 
   const {
     data: accountState,
@@ -53,7 +52,7 @@ export function FinanceProvider({ children }: { children: ReactNode }) {
       };
 
     const paddingAdjustedBalance = new BN(accountState.available).sub(
-      new BN(utils.format.parseNearAmount(NEAR_MAX_AMOUNT_PADDING)!)
+      new BN(utils.format.parseNearAmount(balancePadding || "0")!)
     );
 
     const adjustedBalanceGtZero = paddingAdjustedBalance.gt(new BN(0));

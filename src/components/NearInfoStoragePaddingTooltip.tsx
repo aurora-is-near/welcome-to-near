@@ -1,14 +1,17 @@
 import React from "react";
 import Tooltip from "./Tooltip";
 import { InformationCircleIcon } from "@heroicons/react/20/solid";
-import { NEAR_MAX_AMOUNT_PADDING } from "@/constants/near";
 
-export default function NearInfoStoragePaddingTooltip() {
+export default function NearInfoStoragePaddingTooltip({
+  balancePadding,
+}: {
+  balancePadding: string;
+}) {
   return (
     <Tooltip
       content={
         <>
-          {NEAR_MAX_AMOUNT_PADDING}
+          {balancePadding}
           &nbsp;NEAR of balance is an extra gas padding for TXs.
         </>
       }
