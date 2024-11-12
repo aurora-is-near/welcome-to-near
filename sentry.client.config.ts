@@ -9,10 +9,11 @@ Sentry.init({
   enabled: !!process.env.NEXT_PUBLIC_SENTRY_ENABLED,
   tracesSampleRate: 0.1,
   replaysSessionSampleRate: 0.05,
-  replaysOnErrorSampleRate: 0.05,
+  replaysOnErrorSampleRate: 1,
   integrations: [
     Sentry.replayIntegration({
-      maskAllText: true,
+      maskAllText: false,
+      maskAllInputs: false,
       blockAllMedia: true,
     }),
   ],

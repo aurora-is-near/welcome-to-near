@@ -38,6 +38,7 @@ import {
   DEFAULT_MAX_AMOUNT_PADDING,
   BIGGER_MAX_AMOUNT_PADDING,
 } from "@/constants/near";
+import { setUser } from "@sentry/nextjs";
 
 interface WalletSelectorContextValue {
   selector: WalletSelector;
@@ -179,8 +180,7 @@ export const WalletSelectorContextProvider: React.FC<{
 
   useEffect(() => {
     init().catch((err) => {
-      console.error(err);
-      alert("Failed to initialise wallet selector");
+      console.error("Failed to initialise wallet selector", err);
     });
   }, [init]);
 
@@ -217,6 +217,11 @@ export const WalletSelectorContextProvider: React.FC<{
   const walletSelectorContextValue = useMemo<WalletSelectorContextValue>(() => {
     let account = accounts.find((account) => account.active) || null;
     let accountId = account ? account.accountId : null;
+    if (accountId === null) {
+      setUser(null);
+    } else {
+      setUser({ username: accountId });
+    }
     const activeWallet = selector
       ? selector.store.getState().selectedWalletId
       : null;
