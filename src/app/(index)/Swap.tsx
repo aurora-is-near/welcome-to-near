@@ -86,7 +86,7 @@ const Swap: React.FC = () => {
           swapInProgress.current = false;
         });
 
-      if (isMyNearWallet) {
+      if (!isMyNearWallet) {
         setSwapState("success");
         setTx(
           result ? result[ftTransferCallIndex].transaction.hash : undefined
