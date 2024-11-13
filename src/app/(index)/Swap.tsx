@@ -26,6 +26,28 @@ const REF_DEFAULT_TOKEN_OUT = IS_MAINNET
     "aaaaaa20d9e0e2461697782ef11675f668207961.factory.bridge.near"
   : "ref.fakes.testnet";
 
+const LOCAL_STORAGE_TX_INDEX = "mnw_tx_i";
+const saveMyNearWalletTxIndex = (index: string) => {
+  try {
+    localStorage.setItem(LOCAL_STORAGE_TX_INDEX, index);
+  } catch (error) {
+    console.error(error);
+  }
+};
+const resetMyNearWalletTxIndex = () => {
+  saveMyNearWalletTxIndex("");
+};
+
+export function myNearWalletTxIndex(): string | null {
+  try {
+    const data = localStorage.getItem(LOCAL_STORAGE_TX_INDEX);
+    if (data === null || data === "") return null;
+    return data;
+  } catch (error) {
+    return null;
+  }
+}
+
 const Swap: React.FC = () => {
   const { selector, modal, accountId, isMyNearWallet } = useWalletSelector();
   const searchParams = useSearchParams();
@@ -38,23 +60,30 @@ const Swap: React.FC = () => {
 
   // Show success screen after coming back from MyNearWallet
   useEffect(() => {
-    if (txHash) {
-      setSwapState("success");
-      setTx(txHash);
+    if (txHash && isMyNearWallet) {
+      try {
+        setSwapState("success");
 
-      const newParams = new URLSearchParams(searchParams.toString());
-      newParams.delete("transactionHashes");
+        const ftTransferCall =
+          txHash.split(",")[Number(myNearWalletTxIndex()) || 0];
+        setTx(ftTransferCall);
 
-      const newParamsString = newParams.toString();
+        const newParams = new URLSearchParams(searchParams.toString());
+        newParams.delete("transactionHashes");
 
-      router.replace(
-        pathname + newParamsString ? `?${newParamsString}#swap` : "#swap",
-        {
-          scroll: true,
-        }
-      );
+        const newParamsString = newParams.toString();
+
+        router.replace(
+          pathname + newParamsString ? `?${newParamsString}#swap` : "#swap",
+          {
+            scroll: true,
+          }
+        );
+      } finally {
+        resetMyNearWalletTxIndex();
+      }
     }
-  }, [txHash]);
+  }, [txHash, isMyNearWallet]);
 
   const onSwap = async (transactionsRef: Transaction[]) => {
     try {
@@ -76,6 +105,13 @@ const Swap: React.FC = () => {
             break;
           }
         }
+      }
+
+      // save ft transfer call index to for my near wallet to display corret link to explorer
+      if (isMyNearWallet) {
+        saveMyNearWalletTxIndex(String(ftTransferCallIndex));
+      } else {
+        resetMyNearWalletTxIndex();
       }
 
       const result = await wallet
