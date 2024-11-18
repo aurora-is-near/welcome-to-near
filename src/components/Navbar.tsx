@@ -1,6 +1,6 @@
 "use client";
 
-import { NearLogoFull } from "@/icons";
+import { ArrowSquareOut, NearLogoFull } from "@/icons";
 import Container from "./Container";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -16,16 +16,25 @@ import FreeTransactionCounter, {
 
 const links = [
   {
-    name: "Portfolio",
+    value: "Portfolio",
     url: "/portfolio",
   },
   {
-    name: "Staking",
+    value: "Staking",
     url: "/staking",
   },
   {
-    name: "Explore",
+    value: "Explore",
     url: "/explore",
+  },
+  {
+    value: (
+      <div className="flex items-center gap-1">
+        Support <ArrowSquareOut className="h-5 w-5 text-sand-11" />
+      </div>
+    ),
+    url: process.env.NEXT_PUBLIC_DISCORD_SUPPORT_URL,
+    newTab: true,
   },
 ];
 
@@ -70,8 +79,9 @@ const Navbar = () => {
                     href={link.url}
                     size="sm"
                     style={active ? "primary" : "white"}
+                    target={link.newTab ? "_blank" : ""}
                   >
-                    {link.name}
+                    {link.value}
                   </Button>
                 </li>
               );
@@ -126,8 +136,9 @@ const Navbar = () => {
                           "-mx-3 block rounded-lg px-3 py-2 font-mono font-semibold leading-normal tracking-wide",
                           active ? "bg-sand-12 text-white" : "text-sand-12"
                         )}
+                        target={link.newTab ? "_blank" : ""}
                       >
-                        {link.name}
+                        {link.value}
                       </Link>
                     );
                   })}
