@@ -46,14 +46,14 @@ const Navbar = () => {
 
   return (
     <header className="sticky top-0 z-20 border-b border-sand-6 bg-white">
-      <Container className="flex h-20 items-center justify-between">
-        <div className="flex items-center justify-start xl:min-w-[350px]">
+      <Container className="flex h-20 items-center justify-start">
+        <div className="flex items-center justify-start">
           <Link href="/">
             <span className="sr-only">Home</span>
             <NearLogoFull className="w-28" />
           </Link>
         </div>
-        <div className="flex gap-3 lg:hidden">
+        <div className="ml-auto flex gap-3 lg:hidden">
           <FreeTransactionCounter
             left={data?.left}
             max={data?.max}
@@ -68,7 +68,7 @@ const Navbar = () => {
             <Bars3Icon className="h-6 w-6" aria-hidden="true" />
           </button>
         </div>
-        <nav className="hidden lg:block">
+        <nav className="ml-10 hidden lg:block">
           <ul className="flex items-center space-x-2.5">
             {links.map((link) => {
               const active = pathname.startsWith(link.url);
@@ -88,7 +88,7 @@ const Navbar = () => {
             })}
           </ul>
         </nav>
-        <div className="hidden gap-3 lg:flex lg:items-center lg:justify-end xl:min-w-[350px]">
+        <div className="ml-auto hidden gap-3 lg:flex lg:items-center lg:justify-end xl:min-w-[350px]">
           <FreeTransactionCounter
             left={data?.left}
             max={data?.max}
