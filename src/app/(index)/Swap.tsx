@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useMemo, useRef } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useWalletSelector } from "@/contexts/WalletSelectorContext";
 import { SwapWidget, Transaction } from "@ref-finance/ref-sdk";
 
@@ -47,7 +47,43 @@ export function myNearWalletTxIndex(): string | null {
     return null;
   }
 }
+function extractDegenPoolsIds(
+  pools: { pool_kind: string; id: number }[],
+  map: Record<string, boolean>
+) {
+  for (let i = 0; i < pools.length; i++) {
+    if (pools[i].pool_kind === "DEGEN_SWAP") {
+      map[pools[i].id] = true;
+    }
+  }
+}
+export async function findDegenPoolIds(): Promise<Record<string, boolean>> {
+  const result: Record<string, boolean> = {};
+  try {
+    const data = await fetch("https://indexer.ref.finance/fetchAllPools");
+    if (!data.ok)
+      throw new Error("Failed to fetch all pools to extract degen pools");
+    const pools = await data.json();
 
+    extractDegenPoolsIds(pools.simplePools, result);
+    extractDegenPoolsIds(pools.unRatedPools, result);
+    extractDegenPoolsIds(pools.ratedPools, result);
+
+    return result;
+  } catch (error) {
+    console.error(error);
+    return result;
+  }
+}
+
+function getPoolIdFromMsg(msg: string): number | null {
+  try {
+    return JSON.parse(msg).actions[0].pool_id;
+  } catch (error) {
+    console.error("Failed to get pool id from action msg", error);
+    return null;
+  }
+}
 const Swap: React.FC = () => {
   const { selector, modal, accountId, isMyNearWallet } = useWalletSelector();
   const searchParams = useSearchParams();
@@ -57,6 +93,22 @@ const Swap: React.FC = () => {
   const [swapState, setSwapState] = React.useState<SwapState>(null);
   const [tx, setTx] = React.useState<string | undefined>();
   const swapInProgress = useRef(false);
+  const [degenPoolsIds, setAllDegenPools] = useState<Record<
+    string,
+    boolean
+  > | null>(null);
+
+  useEffect(() => {
+    if (degenPoolsIds === null) {
+      findDegenPoolIds()
+        .then((result) => {
+          setAllDegenPools(result);
+        })
+        .catch((error) => {
+          console.error("Failed to fetch degen pool ids", error);
+        });
+    }
+  }, [degenPoolsIds]);
 
   // Show success screen after coming back from MyNearWallet
   useEffect(() => {
@@ -100,7 +152,17 @@ const Swap: React.FC = () => {
         for (let y = 0; y < tx.functionCalls.length; y++) {
           const action = tx.functionCalls[y];
           if (action.methodName === "ft_transfer_call") {
-            action.gas = "100000000000000";
+            //@ts-ignore
+            const poolId = getPoolIdFromMsg(action.args.msg as string);
+            if (
+              poolId !== null &&
+              degenPoolsIds !== null &&
+              degenPoolsIds[poolId]
+            ) {
+              action.gas = "180000000000000";
+            } else {
+              action.gas = "100000000000000";
+            }
             ftTransferCallIndex = i;
             break;
           }
