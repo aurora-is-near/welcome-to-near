@@ -2718,10 +2718,10 @@
   resolved "https://registry.yarnpkg.com/@react-types/shared/-/shared-3.24.1.tgz#fa06cb681d144fce9c515d8bd296d81440a45d25"
   integrity sha512-AUQeGYEm/zDTN6zLzdXolDxz3Jk5dDL7f506F07U8tBwxNNI3WRdhU84G0/AaFikOZzDXhOZDr3MhQMzyE7Ydw==
 
-"@ref-finance/ref-sdk@1.4.4-beta.0-development":
-  version "1.4.4-beta.0-development"
-  resolved "https://registry.yarnpkg.com/@ref-finance/ref-sdk/-/ref-sdk-1.4.4-beta.0-development.tgz#19cf0add6e52b4d2e2555e79bd3b73e05b781e76"
-  integrity sha512-ytg7to2W1S1DFnECdOOKqIbhGu8C+jbJtRBxCV3q8glKCzQ2g8hLne9ArnbnFDdkMsQ34foeC/Ie5IXyVTUNRg==
+"@ref-finance/ref-sdk@1.4.5":
+  version "1.4.5"
+  resolved "https://registry.yarnpkg.com/@ref-finance/ref-sdk/-/ref-sdk-1.4.5.tgz#ed69177bf7fc158bb9a7d56672031d7f3f0de78c"
+  integrity sha512-EQvjQQgY7DwBhxT53WFfGYmeFE8Ekz/tX3JK/qcryrIEALXNvSNchi3k6FoJCBlu/4shDUUdByeLx7y7uuUYhA==
   dependencies:
     "@near-wallet-selector/core" "^7.0.0"
     "@react-icons/all-files" "^4.1.0"
