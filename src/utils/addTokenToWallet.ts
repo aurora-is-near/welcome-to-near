@@ -4,16 +4,11 @@ import { getConnectorClient } from "@wagmi/core";
 import { wagmiConfig } from "@/contexts/WalletSelectorContext";
 import { getTokenMetaData } from "@/utils/near";
 
-export async function addTokenToWallet(
-  contractId: string,
-  symbol: string,
-  decimals: number
-) {
+export async function addTokenToWallet(contractId: string) {
   try {
-    let image = "";
     const tokenMetadataRequest = await getTokenMetaData(contractId);
-    if (tokenMetadataRequest !== null) {
-      image = tokenMetadataRequest.icon;
+    if (tokenMetadataRequest === null) {
+      return;
     }
 
     const walletClient = await getConnectorClient(wagmiConfig);
@@ -24,9 +19,9 @@ export async function addTokenToWallet(
       type: "ERC20",
       options: {
         address: address,
-        symbol: symbol,
-        decimals: decimals,
-        image,
+        symbol: tokenMetadataRequest.symbol,
+        decimals: tokenMetadataRequest.decimals,
+        image: tokenMetadataRequest.icon,
       },
     });
   } catch (e) {
@@ -34,7 +29,7 @@ export async function addTokenToWallet(
   }
 }
 
-function playgroundComputeAddress(input: string) {
+export function playgroundComputeAddress(input: string) {
   const hash = keccak256(toHex(input));
   return "0x" + hash.substring(26, 66);
 }
