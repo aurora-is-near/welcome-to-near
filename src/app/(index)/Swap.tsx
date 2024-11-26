@@ -178,6 +178,7 @@ const Swap: React.FC = () => {
 
       const result = await wallet
         .signAndSendTransactions(
+          //@ts-ignore
           WalletSelectorTransactions(transactionsRef, accountId)
         )
         .finally(() => {
