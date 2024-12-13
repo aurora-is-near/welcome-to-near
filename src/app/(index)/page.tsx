@@ -138,7 +138,7 @@ export default function Home() {
             </div>
             <Button
               className="relative"
-              href="https://flipsidecrypto.xyz/earn/quests/near"
+              href="https://flipsidecrypto.xyz/earn/near"
               target="_blank"
               rel="noopener noreferrer"
             >
