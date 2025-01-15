@@ -56,7 +56,12 @@ export default function StakedBalance({
               active={false}
               tooltipText="These tokens have been unstaked, but are not yet ready to withdraw. Tokens are ready to withdraw 52 to 65 hours after unstaking."
               actionButton={
-                <Button disabled size="sm" className="!bg-sand-3 !text-sand-8" data-testid="release-stake-button">
+                <Button
+                  disabled
+                  size="sm"
+                  className="!bg-sand-3 !text-sand-8"
+                  data-testid="release-stake-button"
+                >
                   <Clock className="h-4.5 w-4.5" />
                   Pending
                 </Button>
