@@ -44,7 +44,9 @@ export default function StakedBalance({
                   className="!text-sand-12"
                   disabled={!canUnstake}
                   href={unstakeHref}
-                  data-testid="unstake-stake-button"
+                  data-testid={
+                    canUnstake ? "unstake-btn" : "unstake-btn-disabled"
+                  }
                 >
                   Unstake
                 </Button>
@@ -78,7 +80,9 @@ export default function StakedBalance({
                 disabled={!canWithdraw}
                 href={withdrawHref}
                 className="!h-10 !w-fit !px-5 !text-sm !font-semibold !tracking-[0.28px]"
-                data-testid="withdraw-stake-button"
+                data-testid={
+                  canWithdraw ? "withdraw-btn" : "withdraw-btn-disabled"
+                }
               >
                 Withdraw
               </Button>
