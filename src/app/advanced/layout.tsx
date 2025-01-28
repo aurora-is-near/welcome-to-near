@@ -2,7 +2,7 @@ import LayoutWrapper from "@/components/Staking/components/LayoutWrapper";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Account",
+  title: "Advanced",
 };
 
 const Layout = ({
@@ -10,7 +10,7 @@ const Layout = ({
 }: Readonly<{
   children: React.ReactNode;
 }>) => (
-  <LayoutWrapper title="Account" color="white">
+  <LayoutWrapper title="Advanced" color="white">
     {children}
   </LayoutWrapper>
 );
