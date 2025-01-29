@@ -32,6 +32,11 @@
     near-api-js "4.0.3"
     viem "2.16.2"
 
+"@aurora-is-near/is-banned-near-address@1.0.3":
+  version "1.0.3"
+  resolved "https://npm.pkg.github.com/download/@aurora-is-near/is-banned-near-address/1.0.3/21e950bf44c74531f750248a29cfc6efbff762d9#21e950bf44c74531f750248a29cfc6efbff762d9"
+  integrity sha512-gPmc1ZEpQmG+TP2/PaKyYr4o5++WxoPqGPFu6dpHe0RNnmallwdcueBGGoPgn572AtHQvvZPui6H3rhx/SGnNA==
+
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.24.7":
   version "7.24.7"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.24.7.tgz#882fd9e09e8ee324e496bd040401c6f046ef4465"
