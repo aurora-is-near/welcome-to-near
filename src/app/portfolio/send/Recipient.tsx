@@ -4,6 +4,7 @@ import { useSend } from "./Send";
 import { validateAccountId } from "@/utils/near";
 import { CardPadding } from "@/components/Card";
 import ErrorMessage from "@/components/ErrorMessage";
+import { useState } from "react";
 
 type Inputs = {
   recipient: string;
@@ -11,16 +12,19 @@ type Inputs = {
 
 const Recipient = () => {
   const { next, values, setValues } = useSend();
+  const [isValdating, setIsValidating] = useState(false);
   const initialValue = values?.recipient || "";
 
   const {
     register,
     handleSubmit,
     formState: { errors },
+    clearErrors,
   } = useForm<Inputs>({
     defaultValues: {
       recipient: initialValue,
     },
+    reValidateMode: "onSubmit",
   });
 
   const onSubmit: SubmitHandler<Inputs> = ({ recipient }) => {
@@ -43,6 +47,9 @@ const Recipient = () => {
             placeholder="Enter NEAR account ID"
             {...register("recipient", {
               required: true,
+              onChange: () => {
+                clearErrors("recipient");
+              },
               validate: {
                 positive: (v) => {
                   const cleanedRecipient = v.trim().toLowerCase();
@@ -50,6 +57,28 @@ const Recipient = () => {
                     validateAccountId(cleanedRecipient) ||
                     "Enter a valid NEAR account."
                   );
+                },
+                notBanned: async (v) => {
+                  try {
+                    setIsValidating(true);
+                    const cleanedRecipient = v.trim().toLowerCase();
+                    const response = await fetch(
+                      `/api/isBanned?address=${cleanedRecipient}`
+                    );
+                    if (!response.ok) {
+                      throw new Error("Network response was not ok");
+                    }
+                    const payload = await response.json();
+
+                    return (
+                      !Boolean(payload.isBanned) ||
+                      "This account has been restricted from transferring tokens to."
+                    );
+                  } catch {
+                    return "Someting went wrong while validating recipient.";
+                  } finally {
+                    setIsValidating(false);
+                  }
                 },
               },
             })}
@@ -60,7 +89,9 @@ const Recipient = () => {
             </ErrorMessage>
           )}
         </div>
-        <Button className="mt-6 w-full">Continue</Button>
+        <Button className="mt-6 w-full" loading={isValdating}>
+          Continue
+        </Button>
       </form>
     </CardPadding>
   );
