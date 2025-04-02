@@ -40,6 +40,7 @@ const AppsList = ({
           <a
             key={app.name}
             href={app.website}
+            data-testid="explore-apps-link"
             target="_blank"
             rel="noreferrer noopener"
             className="flex flex-col items-center justify-center rounded-2xl bg-sand-1 px-8 py-5 shadow-custom"
