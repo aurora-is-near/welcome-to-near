@@ -9,7 +9,7 @@ import type { WalletSelectorModal } from "@near-wallet-selector/modal-ui";
 import { setupModal } from "@near-wallet-selector/modal-ui";
 import { setupMyNearWallet } from "@near-wallet-selector/my-near-wallet";
 import { setupWalletConnect } from "@near-wallet-selector/wallet-connect";
-import { setupEthereumWallets } from "@aurora-is-near/ethereum-wallets";
+import { setupEthereumWallets } from "@near-wallet-selector/ethereum-wallets";
 import { setupMeteorWallet } from "@near-wallet-selector/meteor-wallet";
 import { setupHereWallet } from "@near-wallet-selector/here-wallet";
 import type { ReactNode } from "react";
