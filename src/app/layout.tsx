@@ -15,7 +15,7 @@ export const viewport: Viewport = {
   maximumScale: 1,
 };
 
-export const monaSans = localFont({
+const monaSans = localFont({
   src: [
     {
       path: "./fonts/MonaSans-Regular.woff2",
@@ -51,7 +51,7 @@ export const monaSans = localFont({
   variable: "--font-monaSans",
 });
 
-export const fkGrotesk = localFont({
+const fkGrotesk = localFont({
   src: [
     {
       path: "./fonts/FKGrotesk-Regular.otf",
