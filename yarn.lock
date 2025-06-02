@@ -20,10 +20,10 @@
     "@jridgewell/gen-mapping" "^0.3.5"
     "@jridgewell/trace-mapping" "^0.3.24"
 
-"@aurora-is-near/is-banned-near-address@1.0.3":
-  version "1.0.3"
-  resolved "https://npm.pkg.github.com/download/@aurora-is-near/is-banned-near-address/1.0.3/21e950bf44c74531f750248a29cfc6efbff762d9#21e950bf44c74531f750248a29cfc6efbff762d9"
-  integrity sha512-gPmc1ZEpQmG+TP2/PaKyYr4o5++WxoPqGPFu6dpHe0RNnmallwdcueBGGoPgn572AtHQvvZPui6H3rhx/SGnNA==
+"@aurora-is-near/is-banned-near-address@1.1.0":
+  version "1.1.0"
+  resolved "https://npm.pkg.github.com/download/@aurora-is-near/is-banned-near-address/1.1.0/0d2cc3a92e7eedc0108eec5647aa67457cdbea1e#0d2cc3a92e7eedc0108eec5647aa67457cdbea1e"
+  integrity sha512-h+jDzYICNq/X/MxG1pVtBzUdXDQKAB9yZwpv2JjOg31CgJVHr8CAram66DsIR/SShypUFwYdYEwBcHGUDIBrCg==
 
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.24.7":
   version "7.24.7"
