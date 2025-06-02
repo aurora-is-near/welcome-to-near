@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useWalletSelector } from "@/contexts/WalletSelectorContext";
-import { SwapWidget, Transaction } from "@ref-finance/ref-sdk";
+import { init_env, SwapWidget, Transaction } from "@ref-finance/ref-sdk";
 
 import {
   WalletSelectorTransactions,
@@ -15,7 +15,7 @@ import {
 import { sendGaEvent } from "@/utils/googleAnalytics";
 import { SwapState } from "@ref-finance/ref-sdk/dist/swap-widget/types";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { IS_MAINNET } from "@/constants";
+import { IS_MAINNET, NEAR_CONNECTION_CONFIG } from "@/constants";
 
 const REF_DEFAULT_TOKEN_IN = IS_MAINNET
   ? WRAP_NEAR_MAINNET.id
@@ -100,6 +100,7 @@ const Swap: React.FC = () => {
 
   useEffect(() => {
     if (degenPoolsIds === null) {
+      init_env(process.env.nearEnv, undefined, NEAR_CONNECTION_CONFIG.nodeUrl);
       findDegenPoolIds()
         .then((result) => {
           setAllDegenPools(result);
