@@ -11,7 +11,13 @@ const SearchResults = ({
 }) => {
   const filteredApps = allApps
     .reverse() // Reverse to get the latest apps first. A lot of the apps on DappRadar are added quite a long time ago and are not fresh and have broken links etc.
-    .filter((app: any) => app.name.toLowerCase().includes(search));
+    .filter((app: any) => {
+      try {
+        return app.name.toLowerCase().includes(search.trim().toLowerCase());
+      } catch {
+        return false;
+      }
+    });
 
   if (!filteredApps.length)
     return (
