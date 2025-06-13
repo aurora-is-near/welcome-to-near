@@ -48,7 +48,10 @@ const Search = ({ search }: { search?: string }) => {
           }}
         />
         {isSearching && (
-          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-5 text-sand-11">
+          <div
+            className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-5 text-sand-11"
+            data-testid="search-dapps-spinner"
+          >
             <Spinner size="sm" />
           </div>
         )}
