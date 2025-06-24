@@ -11,7 +11,7 @@ export async function GET(request: NextRequest) {
       });
     }
     return NextResponse.json({
-      isBanned: isBannedNearAddress(address),
+      isBanned: isBannedNearAddress(address.toLowerCase()),
     });
   } catch (error) {
     console.error(error);
