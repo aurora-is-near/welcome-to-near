@@ -8,6 +8,7 @@ import localFont from "next/font/local";
 import getWebsiteUrl from "@/utils/getWebsiteUrl";
 import CookiesConsent from "@/components/CookiesConsent";
 import type { Viewport } from "next";
+import BannedAddressConnected from "@/components/Modals/BannedAddressConnected";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -162,6 +163,7 @@ export default function RootLayout({
           <main className="flex flex-1 flex-col">{children}</main>
           <Footer />
           <CookiesConsent />
+          <BannedAddressConnected />
         </Providers>
       </body>
     </html>
