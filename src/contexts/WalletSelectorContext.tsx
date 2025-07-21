@@ -115,6 +115,7 @@ const web3Modal = createWeb3Modal({
     "--w3m-font-size-master": "9.5px",
     "--w3m-font-family":
       '__monaSans_70dae0, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+    // https://docs.walletconnect.com/appkit/react/core/theming#themevariables
   },
   allWallets: "SHOW",
   enableOnramp: false,
