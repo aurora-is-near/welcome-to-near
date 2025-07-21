@@ -115,7 +115,6 @@ const web3Modal = createWeb3Modal({
     "--w3m-font-size-master": "9.5px",
     "--w3m-font-family":
       '__monaSans_70dae0, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
-    // https://docs.walletconnect.com/appkit/react/core/theming#themevariables
   },
   allWallets: "SHOW",
   enableOnramp: false,
@@ -167,7 +166,7 @@ export const WalletSelectorContextProvider: React.FC<{
     });
     // const _modal = setupModal(_selector, { contractId: "" });
     // NOTE: We use an acces key to be compatible with all NEAR wallets,
-    // but skip the login access key when possible, for example skipSignInAccessKey with setupEthereumWallets.
+    // but skip the login access key when possible, for example skipSignInAccessKey with setupEthereumWallets. 
     const _modal = setupModal(_selector, {
       contractId: IS_MAINNET ? "welcome-to.near" : "welcome-to-near.testnet",
     });
