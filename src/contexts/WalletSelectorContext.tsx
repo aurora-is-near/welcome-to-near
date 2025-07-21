@@ -145,6 +145,7 @@ export const WalletSelectorContextProvider: React.FC<{
       modules: [
         setupMyNearWallet(),
         setupEthereumWallets({
+          //@ts-ignore
           wagmiConfig,
           web3Modal,
           alwaysOnboardDuringSignIn: true,
