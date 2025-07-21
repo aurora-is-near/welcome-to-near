@@ -167,7 +167,7 @@ export const WalletSelectorContextProvider: React.FC<{
     });
     // const _modal = setupModal(_selector, { contractId: "" });
     // NOTE: We use an acces key to be compatible with all NEAR wallets,
-    // but skip the login access key when possible, for example skipSignInAccessKey with setupEthereumWallets. 
+    // but skip the login access key when possible, for example skipSignInAccessKey with setupEthereumWallets.
     const _modal = setupModal(_selector, {
       contractId: IS_MAINNET ? "welcome-to.near" : "welcome-to-near.testnet",
     });
