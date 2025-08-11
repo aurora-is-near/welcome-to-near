@@ -11,7 +11,7 @@ const cspHeader = `
   form-action 'self';
   worker-src 'self' blob:;
   frame-ancestors 'self' *.walletconnect.com *.walletconnect.org;
-  connect-src 'self' d3hb14vkzrxvla.cloudfront.net beaconapi.helpscout.net chatapi.helpscout.net *.near.org *.ref-finance.com *.ref.finance *.aurora.dev api.web3modal.com *.walletconnect.org *.walletconnect.com *.sentry.io wss://relay.walletconnect.com wss://relay.walletconnect.org *.walletlink.org wss://www.walletlink.org *.coinbase.com https://rpc.testnet.near.org https://closerpc.aurora.dev https://reltn.aurora.dev https://api.web3modal.org www.googletagmanager.com *.google-analytics.com https://h4n.app https://*.peersyst.tech;
+  connect-src 'self' d3hb14vkzrxvla.cloudfront.net beaconapi.helpscout.net chatapi.helpscout.net *.near.org *.ref-finance.com *.ref.finance *.aurora.dev api.web3modal.com *.walletconnect.org *.walletconnect.com *.sentry.io wss://relay.walletconnect.com wss://relay.walletconnect.org *.walletlink.org wss://www.walletlink.org *.coinbase.com https://rpc.testnet.near.org https://relmn.aurora.dev https://reltn.aurora.dev https://api.web3modal.org www.googletagmanager.com *.google-analytics.com https://h4n.app https://*.peersyst.tech;
   frame-src  *.walletconnect.org *.walletconnect.com https://my.herewallet.app https://*.peersyst.tech/;
 `;
 
