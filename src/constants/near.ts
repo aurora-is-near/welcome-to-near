@@ -307,6 +307,27 @@ const DEFAULT_TOKEN_MAINNET_LIST: TokenInfo[] = [
     decimals: 18,
     icon: "/img/tokens/pad.svg",
   },
+  {
+    id: "token.rhealab.near",
+    name: "Rhea",
+    symbol: "RHEA",
+    decimals: 18,
+    icon: "/img/tokens/rhea.png",
+  },
+  {
+    id: "token.publicailab.near",
+    name: "PublicAI",
+    symbol: "PUBLIC",
+    decimals: 18,
+    icon: "/img/tokens/publicai.svg",
+  },
+  {
+    id: "zec.omft.near",
+    name: "Zcash",
+    symbol: "ZEC",
+    decimals: 8,
+    icon: "/img/tokens/zec.svg",
+  },
 ];
 
 export const DEFAULT_TOKENS_LIST = IS_MAINNET

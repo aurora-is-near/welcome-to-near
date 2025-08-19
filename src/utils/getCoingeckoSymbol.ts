@@ -34,6 +34,9 @@ export const coingeckoSymbolMap = {
   PARAS: "paras",
   STNEAR: "staked-near",
   ETH: "ethereum",
+  PUBLIC: "publicai",
+  ZEC: "zcash",
+  RHEA: "rhea-2",
 };
 
 type CoingeckoSymbol = keyof typeof coingeckoSymbolMap;
