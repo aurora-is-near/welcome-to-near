@@ -36,6 +36,7 @@ export const coingeckoSymbolMap = {
   ETH: "ethereum",
   PUBLIC: "publicai",
   ZEC: "zcash",
+  JAMBO: "jambo-2",
   RHEA: "rhea-2",
 };
 

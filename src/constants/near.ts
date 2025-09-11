@@ -328,6 +328,13 @@ const DEFAULT_TOKEN_MAINNET_LIST: TokenInfo[] = [
     decimals: 8,
     icon: "/img/tokens/zec.svg",
   },
+  {
+    id: "jambo-1679.meme-cooking.near",
+    name: "JAMBO",
+    symbol: "JAMBO",
+    decimals: 18,
+    icon: "/img/tokens/jambo.webp",
+  },
 ];
 
 export const DEFAULT_TOKENS_LIST = IS_MAINNET
