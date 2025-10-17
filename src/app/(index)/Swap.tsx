@@ -84,6 +84,11 @@ function getPoolIdFromMsg(msg: string): number | null {
     return null;
   }
 }
+
+if (typeof window !== "undefined") {
+  init_env(process.env.nearEnv, undefined, NEAR_CONNECTION_CONFIG.nodeUrl);
+}
+
 const Swap: React.FC = () => {
   const { selector, modal, accountId, isMyNearWallet } = useWalletSelector();
   const searchParams = useSearchParams();
@@ -100,7 +105,6 @@ const Swap: React.FC = () => {
 
   useEffect(() => {
     if (degenPoolsIds === null) {
-      init_env(process.env.nearEnv, undefined, NEAR_CONNECTION_CONFIG.nodeUrl);
       findDegenPoolIds()
         .then((result) => {
           setAllDegenPools(result);
