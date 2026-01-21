@@ -32,7 +32,7 @@ import {
 } from "@wagmi/core";
 import { type Chain } from "@wagmi/core/chains";
 import { injected, walletConnect } from "@wagmi/connectors";
-import { IS_MAINNET } from "@/constants";
+import { IS_MAINNET, NEAR_CONNECTION_CONFIG } from "@/constants";
 import getWebsiteUrl from "@/utils/getWebsiteUrl";
 import {
   DEFAULT_MAX_AMOUNT_PADDING,
@@ -140,8 +140,23 @@ export const WalletSelectorContextProvider: React.FC<{
 
   const init = useCallback(async () => {
     const _selector = await setupWalletSelector({
-      network: process.env.nearEnv as NetworkId,
+      network: IS_MAINNET
+        ? {
+            networkId: "mainnet",
+            nodeUrl: NEAR_CONNECTION_CONFIG.nodeUrl,
+            helperUrl: "https://helper.mainnet.near.org",
+            explorerUrl: "https://nearblocks.io",
+            indexerUrl: "https://api.fastnear.com/v0",
+          }
+        : {
+            networkId: "testnet",
+            nodeUrl: NEAR_CONNECTION_CONFIG.nodeUrl,
+            helperUrl: "https://helper.testnet.near.org",
+            explorerUrl: "https://testnet.nearblocks.io",
+            indexerUrl: "https://api.fastnear.com/v0",
+          },
       debug: true,
+      fallbackRpcUrls: [NEAR_CONNECTION_CONFIG.nodeUrl],
       modules: [
         setupMyNearWallet(),
         setupEthereumWallets({
