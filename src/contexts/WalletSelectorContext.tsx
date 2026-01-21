@@ -140,22 +140,21 @@ export const WalletSelectorContextProvider: React.FC<{
 
   const init = useCallback(async () => {
     const _selector = await setupWalletSelector({
-      network:
-        process.env.nearEnv === "mainnet"
-          ? {
-              networkId: "mainnet",
-              nodeUrl: NEAR_CONNECTION_CONFIG.nodeUrl,
-              helperUrl: "https://helper.mainnet.near.org",
-              explorerUrl: "https://nearblocks.io",
-              indexerUrl: "https://api.fastnear.com/v0",
-            }
-          : {
-              networkId: "testnet",
-              nodeUrl: NEAR_CONNECTION_CONFIG.nodeUrl,
-              helperUrl: "https://helper.testnet.near.org",
-              explorerUrl: "https://testnet.nearblocks.io",
-              indexerUrl: "https://api.fastnear.com/v0",
-            },
+      network: IS_MAINNET
+        ? {
+            networkId: "mainnet",
+            nodeUrl: NEAR_CONNECTION_CONFIG.nodeUrl,
+            helperUrl: "https://helper.mainnet.near.org",
+            explorerUrl: "https://nearblocks.io",
+            indexerUrl: "https://api.fastnear.com/v0",
+          }
+        : {
+            networkId: "testnet",
+            nodeUrl: NEAR_CONNECTION_CONFIG.nodeUrl,
+            helperUrl: "https://helper.testnet.near.org",
+            explorerUrl: "https://testnet.nearblocks.io",
+            indexerUrl: "https://api.fastnear.com/v0",
+          },
       debug: true,
       fallbackRpcUrls: [NEAR_CONNECTION_CONFIG.nodeUrl],
       modules: [
