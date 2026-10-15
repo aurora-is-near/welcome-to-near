@@ -79,11 +79,11 @@ const ConnectWalletButton = () => {
             </CopyToClipboard>
             <MenuItem>
               <Link
-                href="/account"
+                href="/advanced"
                 className="flex w-full items-center gap-x-2 px-4 py-3 text-left text-sm font-semibold text-sand-11 data-[focus]:bg-sand-3 data-[focus]:text-sand-12"
               >
                 <Cog6ToothIcon className="h-5 w-5 flex-shrink-0" />
-                Account
+                Advanced
               </Link>
             </MenuItem>
             <MenuItem>

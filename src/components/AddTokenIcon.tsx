@@ -18,7 +18,7 @@ export default function AddTokenIcon({
     <Tooltip content="Add token to wallet" tooltipClassname="w-fit text-nowrap">
       <PlusCircleIcon
         className="h-5 w-5 text-sand-8 group-hover:text-sand-11"
-        onClick={() => addTokenToWallet(contract, symbol, decimals)}
+        onClick={() => addTokenToWallet(contract)}
       />
     </Tooltip>
   ) : null;

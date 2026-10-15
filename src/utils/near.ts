@@ -279,3 +279,41 @@ export const getMinStorageBalance = async (
     return FT_MINIMUM_STORAGE_BALANCE_LARGE;
   }
 };
+export const lookupToken = async (address: string): Promise<string | null> => {
+  try {
+    const nearConnection = await connect(NEAR_CONNECTION_CONFIG);
+    const acc = new Account(nearConnection.connection, "dontcare");
+    const data = await acc.viewFunction({
+      contractId: "address-map.near",
+      methodName: "lookup",
+      args: { address },
+    });
+
+    return data;
+  } catch (e) {
+    console.error(
+      `Failed to lookup a token in address-map.near: ${address}`,
+      e
+    );
+    return null;
+  }
+};
+export const register = async (account_id: string): Promise<void> => {
+  try {
+    const nearConnection = await connect(NEAR_CONNECTION_CONFIG);
+    const acc = new Account(nearConnection.connection, "dontcare");
+    await acc.viewFunction({
+      contractId: "address-map.near",
+      methodName: "register",
+      gas: BigInt("3000000000000"),
+      args: { account_id },
+      attachedDeposit:
+        BigInt(account_id.length + 20) * BigInt("10000000000000000000"),
+    });
+  } catch (e) {
+    console.error(
+      `Failed to register a token in address-map.near: ${account_id}`,
+      e
+    );
+  }
+};

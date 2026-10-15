@@ -7,12 +7,17 @@ import {
 } from "near-api-js/lib/providers/provider";
 import ConnectAccount from "@/components/Staking/components/ConnectAccount";
 import { useWalletSelector } from "@/contexts/WalletSelectorContext";
-import { fetchAccessKeys } from "@/utils/near";
+import { fetchAccessKeys, lookupToken, register } from "@/utils/near";
 import { formatUnits } from "viem";
 import { Card, CardPadding } from "@/components/Card";
 import { InformationCircleIcon } from "@heroicons/react/20/solid";
+import Button from "@/components/Button";
+import {
+  addTokenToWallet,
+  playgroundComputeAddress,
+} from "@/utils/addTokenToWallet";
 
-const AccountPage = () => {
+const AdvancedPage = () => {
   const { accountId, selector, isEthereumWallet } = useWalletSelector();
   const [dappAccessKeys, setDappAccessKeys] = useState<AccessKeyInfoView[]>([]);
   const [onboardingAccessKeys, setOnboardingAccessKeys] = useState<
@@ -130,43 +135,104 @@ const AccountPage = () => {
       </Card>
 
       {isEthereumWallet && (
-        <Card>
-          <CardPadding>
-            <h2 className="font-sans text-2xl font-medium leading-[1.3] text-sand-12">
-              Onboarding key
-            </h2>
-            <p className="mt-4 text-base leading-normal tracking-wider text-sand-12">
-              This key enables your Ethereum wallet account to transact on NEAR
-              Protocol.
-            </p>
-            {onboardingAccessKeys.length ? (
-              <ul className="mt-4 space-y-4">
-                {onboardingAccessKeys.map((key) => (
-                  <li
-                    key={key.public_key}
-                    className="overflow-hidden text-ellipsis rounded-lg bg-sand-3 px-4 py-4 text-base leading-none text-sand-11"
-                  >
-                    {key.public_key}
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <div className="mt-4 flex rounded-lg bg-blue-50 px-4 py-4">
-                <InformationCircleIcon
-                  className="h-5 w-5 flex-shrink-0 text-blue-400"
-                  aria-hidden="true"
-                />
-                <p className="ml-3 text-sm tracking-wider text-blue-700">
-                  Your account is not yet onboarded, re-connect your wallet to
-                  onboard.
-                </p>
-              </div>
-            )}
-          </CardPadding>
-        </Card>
+        <>
+          <Card>
+            <CardPadding>
+              <h2 className="font-sans text-2xl font-medium leading-[1.3] text-sand-12">
+                Onboarding key
+              </h2>
+              <p className="mt-4 text-base leading-normal tracking-wider text-sand-12">
+                This key enables your Ethereum wallet account to transact on
+                NEAR Protocol.
+              </p>
+              {onboardingAccessKeys.length ? (
+                <ul className="mt-4 space-y-4">
+                  {onboardingAccessKeys.map((key) => (
+                    <li
+                      key={key.public_key}
+                      className="overflow-hidden text-ellipsis rounded-lg bg-sand-3 px-4 py-4 text-base leading-none text-sand-11"
+                    >
+                      {key.public_key}
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <div className="mt-4 flex rounded-lg bg-blue-50 px-4 py-4">
+                  <InformationCircleIcon
+                    className="h-5 w-5 flex-shrink-0 text-blue-400"
+                    aria-hidden="true"
+                  />
+                  <p className="ml-3 text-sm tracking-wider text-blue-700">
+                    Your account is not yet onboarded, re-connect your wallet to
+                    onboard.
+                  </p>
+                </div>
+              )}
+            </CardPadding>
+          </Card>
+          <AddCustomToken />
+        </>
       )}
     </>
   );
 };
 
-export default AccountPage;
+export default AdvancedPage;
+
+const AddCustomToken = () => {
+  const [input, setInput] = useState("");
+  const [loading, setLoading] = useState(false);
+  const inputDisabled = input === "";
+  const tryAddToken = async () => {
+    if (inputDisabled) return;
+    try {
+      setLoading(true);
+      const result = await lookupToken(playgroundComputeAddress(input));
+      if (result === null) {
+        await register(input);
+        return;
+      }
+      await addTokenToWallet(input);
+    } catch (e) {
+      console.error(e);
+    } finally {
+      setLoading(false);
+    }
+  };
+  return (
+    <Card>
+      <CardPadding>
+        <h2 className="font-sans text-2xl font-medium leading-[1.3] text-sand-12">
+          Add a custom token to your wallet
+        </h2>
+        <p className="mt-4 text-base leading-normal tracking-wider text-sand-12">
+          Write a token account id and click Add to track a token in your
+          wallet.
+        </p>
+        <p className="mt-4 text-base leading-normal tracking-wider text-sand-12">
+          If token has not been registered in adress-map.near contract you will
+          be promted to register it in the contract otherwise it can't be used
+          in a EVM wallet.
+        </p>
+        <div className="mt-4 flex items-center overflow-hidden text-ellipsis rounded-lg bg-sand-3 px-4 py-3 text-base leading-none text-sand-11">
+          <input
+            type="text"
+            name="search"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            className="flex-1 border-0 bg-sand-3 p-0 pr-4 text-base text-sand-12 placeholder:text-sand-11"
+          />
+        </div>
+        <Button
+          className="ml-auto mt-4 !block"
+          size="sm"
+          onClick={tryAddToken}
+          disabled={inputDisabled}
+          loading={loading}
+        >
+          Add
+        </Button>
+      </CardPadding>
+    </Card>
+  );
+};
